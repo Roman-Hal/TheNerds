@@ -9,3 +9,43 @@
 .message:hover {
 	background-color: yellow;
 }
+.replyFormStyle {
+	display:flex;
+	flex-direction: column;
+}
+
+.replyFormStyle input {
+	display: inline-block;
+	padding: 16px;
+	width: 20%;
+	margin: 1rem 0;
+
+}
+
+.replyFormStyle textarea {
+	display: inline-block;
+	padding: 16px;
+	padding: 4rem;
+	width: 50%;
+}
+
+.answersFormat {
+	margin: 1rem;
+
+}
+.subAnswersFormat {
+	margin: 1rem;
+	list-style: none;
+	border-left: 3px solid grey; 
+    list-style-position: outside;
+}
+
+.selectedQtnContain {
+	width: 70%;
+	margin: auto;
+	border: 2px solid grey;
+}
+
+.selectedQtnContain li {
+	list-style: none;
+}

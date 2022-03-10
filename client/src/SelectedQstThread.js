@@ -1,22 +1,26 @@
-import React from 'react';
-import AnswersThreads from './AnswersThreads';
-import ReplyForm from './ReplyForm';
-import expleData from './expleData.json'
+import React from "react";
+import AnswersByIdThreads from "./AnswersByIdThreads";
+import QuestionById from "./QuestionById";
+import { questionsData } from "./mock/data.js";
 
-const SelectedQtnThread = () => {
-    return(
-        <ul>
-            <li>
-                <h1>{expleData.title}</h1>
-                <p>{expleData.description}</p>
-                <h4>{expleData.name}</h4>
-                <span>{data.date}</span>
-            </li>
-            <AnswersThreads />
-            <ReplyForm />
-        </ul>
-    );
+const SelectedQtnThread = (props) => {
+    return (
+			<ul className="selectedQtnContain">
+				<li>
+					<QuestionById
+						questionData={questionsData.find((q) => q.id == props.id)}
+					/>
+				</li>
+				<li>
+					<AnswersByIdThreads
+						answersData={
+							questionsData.filter((q) => q.id == props.id)[0].answers
+						}
+					/>
+				</li>
+			</ul>
+		);
 
-}
+};
 
 export default SelectedQtnThread;
