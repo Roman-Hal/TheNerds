@@ -1,5 +1,5 @@
 import React from "react";
-import AnswersByIdThreads from "./AnswersByIdThreads";
+import ReplyForm from "./ReplyForm";
 import QuestionById from "./QuestionById";
 import { questionsData } from "./mock/data.js";
 
@@ -12,11 +12,7 @@ const SelectedQtnThread = (props) => {
 					/>
 				</li>
 				<li>
-					<AnswersByIdThreads
-						answersData={
-							questionsData.filter((q) => q.id == props.id)[0].answers
-						}
-					/>
+					<ReplyForm replyData={questionsData.filter((q) => q.id == props.id)[0].answers} />
 				</li>
 			</ul>
 		);

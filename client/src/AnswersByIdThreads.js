@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import ReplyForm from "./ReplyForm";
+import React from "react";
 
 const AnswersByIdThreads = (props) => {
-	const [updatedAnswersData, setUpdatedAnswersData] = useState(props.answersData);
-
-
    return (
 			<ul className="answersFormat">
-				{updatedAnswersData.map((a) => (
+				{props.answersData.map((a) => (
 					<>
 						<li className="subAnswersFormat">
 							{a.description} <br />
@@ -15,9 +11,6 @@ const AnswersByIdThreads = (props) => {
 						</li>
 					</>
 				))}
-				<li>
-					<ReplyForm replyData={setUpdatedAnswersData} />
-				</li>
 			</ul>
 		);
 };

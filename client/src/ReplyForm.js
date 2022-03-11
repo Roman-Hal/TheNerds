@@ -1,17 +1,28 @@
 import React, { useState } from "react";
+import AnswersByIdThreads from "./AnswersByIdThreads";
 
 const ReplyForm = (props) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [updatedAnswersData, setUpdatedAnswersData] = useState(
+			props.replyData
+		);
+
 
     const handleReply = () => {
-        props.setUpdatedAnswersData((updatedAnswersData.concatenate([`{name: ${name}, description: ${description}}`])));
-        alert(`${name} \n ${description}`);
+        setUpdatedAnswersData((updatedAnswersData.concatenate(...[`{name: ${name}, description: ${description}}`])));
         setName("");
         setDescription("");
+        alert(`${name} \n ${description}`);
     };
+    console.log(updatedAnswersData);
     return (
 			<div>
+                <>
+					<AnswersByIdThreads
+						answersData={updatedAnswersData}
+					/>
+				</>
 				<form className="replyFormStyle" onSubmit={handleReply}>
 					{/* <label htmlFor='addName'> */}
 					<input
