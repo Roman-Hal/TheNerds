@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import "./pages/AskQuestionForm.css"
 const Form=() => {
 
        return (
