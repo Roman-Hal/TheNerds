@@ -26,7 +26,7 @@ export function Home() {
 	return (
 		<main className="main" role="main">
 			<div>
-				<h1>TheNerds APP</h1>
+				<h1>TheNerds Q&A APP</h1>
 				<form>
 					<div>
 						<label htmlFor='username' className="formLabel">Username</label>

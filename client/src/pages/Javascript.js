@@ -8,6 +8,7 @@ const Javascript = () => {
     <main className="main" role="main">
     <h1>TheNerds APP</h1>
     <h1>Javascript questions</h1>
+    <button className="mainCatbtn">Add Question</button>
         <div className="questionsDiv">
         </div>
         <div>
