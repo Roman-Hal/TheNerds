@@ -9,3 +9,85 @@
 .message:hover {
 	background-color: yellow;
 }
+
+.main {
+	background-color: blue;
+	min-height: 1000px;
+	text-align: center;
+}
+
+label, input {
+	/*display: flex;
+	flex-direction: column;*/
+	display: block;
+	size: 50px;
+	width: 100%;
+	margin: 10px;
+	
+}
+
+label {
+	color: white;
+	float: left;
+	font-size: 25px;
+}
+
+input {
+	height: 30px;
+	font-size: 20px;
+}
+
+h1, h2 {
+	color: white;
+	padding-top: 30px;
+}
+
+button {
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: green;
+	color: white;
+	position: left;
+	font-size: 18px;
+}
+
+button:hover {
+	background-color: lightgreen;
+	color: black;
+}
+
+.categoryBtn {
+	width: 300px;
+	height: 40px;
+	margin: 10px;
+}
+
+.mainCatbtn {
+	height: auto;
+}
+
+form {
+	max-width: 600px;
+	/*position: relative;*/
+	margin: auto;
+	padding: auto;
+}
+
+#categoryDiv {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 20px;
+	margin: 10px;
+}
+
+.questionsDiv {
+	border: 1px solid white;
+	width: 80%;
+	margin: auto;
+	position: center;
+	min-height: 400px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
