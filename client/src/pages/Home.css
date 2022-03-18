@@ -1,4 +1,15 @@
-.logo {
+*{
+	box-sizing: border-box;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+html {
+	background-color: WhiteSmoke;
+}
+/* .logo {
 	width: 100px;
 }
 
@@ -8,44 +19,64 @@
 
 .message:hover {
 	background-color: yellow;
-}
-.replyFormStyle {
-	display:flex;
-	flex-direction: column;
-}
-
-.replyFormStyle input {
-	display: inline-block;
-	padding: 16px;
-	width: 20%;
-	margin: 1rem 0;
+} */
+.questionStyle button{
+	width: 10%;
 
 }
 
-.replyFormStyle textarea {
-	display: inline-block;
-	padding: 16px;
-	padding: 4rem;
-	width: 50%;
+.questionStyle p{
+	text-align: justify;	
+
+}
+
+.questionStyle p:nth-child(3) {
+	color: DarkSlateGrey;
+}
+
+.questionStyle h4{
+	text-align: left;
+	font-size: large;
+	font-weight: lighter;
+	color: brown;
+
+}
+
+.questionStyle span{
+	margin-right: 0.7rem;
+	font-weight: bold;
+
+}
+
+.questionStyle{
+	padding: 1rem;
+
+}
+
+.questionStyle:hover{
+	background-color: rgb(0, 0, 0,0.1);
+
+}
+.listedQtnThreadFormat button, 
+.listedQtnThreadFormat button:hover, 
+.listedQtnThreatFormat button:focus {
+  outline: none;
+}
+
+.listedQtnThreadFormat button {
+  border: none;
 }
 
 .answersFormat {
-	margin: 1rem;
-
+	border-left: 3px solid grey;
 }
+
 .subAnswersFormat {
-	margin: 1rem;
-	list-style: none;
-	border-left: 3px solid grey; 
-    list-style-position: outside;
+	margin-left: 0.5rem;
 }
 
-.selectedQtnContain {
-	width: 70%;
-	margin: auto;
-	border: 2px solid grey;
-}
+/* .highlight {
+	background-color: rgb(245, 245, 220, 0.5);
+} */
 
-.selectedQtnContain li {
-	list-style: none;
-}
+
