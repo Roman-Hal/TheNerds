@@ -1,23 +1,45 @@
 import { Route, Routes } from "react-router-dom";
+import React /*{ useState }*/ from "react";
 
+import Login from "./pages/Login";
 import About from "./pages/About";
-import Home from "./pages/Home";
+//import Home from "./pages/Home";
 import Main from "./pages/Main";
 import Signup from "./pages/Signup";
-import Javascript from "./pages/Javascript";
-import Css from "./pages/Css";
-import Html from "./pages/Html";
+//import useToken from "./components/useToken";
 
-const App = () => (
+/*function setToken(userToken) {
+	sessionStorage.setItem("token", JSON.stringify(userToken));
+}
+function getToken() {
+	const tokenString = sessionStorage.getItem("token");
+	const userToken = JSON.parse(tokenString);
+	return userToken?.token;
+}*/
+
+const App = () => {
+
+	/* ## do not delete this part ## */
+
+
+	//const { token, setToken } = useToken();
+	//const [token, setToken] = useState();
+	//const token = getToken();
+
+	/*if(!token) {
+		return <Login setToken={setToken} />;
+	}*/
+
+	/* ## do not delete or update the part above ## */
+
+	return (
 	<Routes>
-		<Route path="/" element={<Home />} />
-		<Route path="/Main" element={<Main />} />
+		<Route path="/" element={<Main />} />
+		<Route path="/Login" element={<Login />} />
 		<Route path="/Signup" element={<Signup />} />
-		<Route path="/Javascript" element={<Javascript />} />
-		<Route path="/Css" element={<Css />} />
-		<Route path="/Html" element={<Html />} />
 		<Route path="/about/this/site" element={<About />} />
 	</Routes>
-);
-
+	);
+};
+//<Route path="/" element={<Home />} />
 export default App;
