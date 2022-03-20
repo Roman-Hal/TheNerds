@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
+//import { render } from "react-dom";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -42,9 +43,26 @@ export function Home() {
 
 
 	return (
-		<main role="main">
+		<main className="main" role="main">
 			<div>
-				<img
+				<h1>TheNerds Q&A APP</h1>
+				<form>
+					<div>
+						<label htmlFor='username' className="formLabel">Username</label>
+						<input type="text" id='username' placeholder='Username' className="formInput" />
+					</div>
+					<div>
+						<label htmlFor='password' className="formLabel">Password</label>
+						<input type="password" id='password' placeholder='Password' className="formInput" />
+					</div>
+					</form>
+				<Link to="/Main"><button>Login</button></Link><Link to="/Signup"><button>Sign Up</button></Link>
+			</div>
+		</main>
+	);
+}
+
+/*<img
 					className="logo"
 					data-qa="logo"
 					src={logo}
@@ -53,10 +71,6 @@ export function Home() {
 				<h1 className="message" data-qa="message">
 					{message}
 				</h1>
-				<Link to="/about/this/site">About</Link>
-			</div>
-		</main>
-	);
-}
+				<Link to="/about/this/site">About</Link>*/
 
 export default Home;
