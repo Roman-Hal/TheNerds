@@ -6,7 +6,7 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-html {
+html, body {
 	background-color: WhiteSmoke;
 }
 /* .logo {
@@ -39,7 +39,6 @@ html {
 	font-size: large;
 	font-weight: lighter;
 	color: brown;
-
 }
 
 .questionStyle span{
@@ -68,13 +67,80 @@ html {
 }
 
 .answersFormat {
-	border-left: 3px solid grey;
+	border-left: 3px solid brown;
 }
 
 .subAnswersFormat {
-	margin-left: 0.5rem;
+	margin-left: 1rem;
 }
 
+.replyFormStyle {
+	display: flex;
+	flex-direction: column;
+	position: -webkit-sticky; /* Safari */
+ 	position: sticky;
+ 	bottom: 1.5rem;
+}
+
+.replyFormStyle textarea{
+	margin: 1rem 0;
+	/* border-radius: 4px; */
+}
+
+.replyFormStyle button {
+	padding: 1rem;
+	border-radius: 8px;
+	border: none;
+}
+
+.replyFormStyle input {
+	/* padding: 1rem;
+	border-radius: 4px; */
+	margin-top: 1rem;	
+}
+
+.replyFormStyle p {
+	text-align: justify;
+}
+
+.selectedQtnContain {
+	margin: 0.7rem auto;
+	width: 70%;
+	height: 100vh;
+	background-color: WhiteSmoke;
+}
+
+.selectedQtnContain li{
+	list-style: none;	
+}
+
+.questionByIdStyle h3{
+	text-align: left;
+	font-size: large;
+	font-weight: lighter;
+	color: brown;
+}
+
+.questionByIdStyle span{
+	margin-right: 1rem;
+	font-weight: bold;
+}
+
+.questionByIdStyle p{
+	text-align: justify;
+}
+
+.subAnswersFormat .p1{
+	margin-bottom: 0;
+}
+
+.wrapper{
+  border: 1px solid grey;
+}
+
+.editor{
+  background-color: lavender;
+}
 /* .highlight {
 	background-color: rgb(245, 245, 220, 0.5);
 } */

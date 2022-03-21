@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AnswersByIdThreads from "../AnswersById/AnswersByIdThreads";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const ReplyForm = ({ replyData }) => {
 	const [name, setName] = useState("");
@@ -44,25 +46,32 @@ const ReplyForm = ({ replyData }) => {
 			<>
 				<AnswersByIdThreads answersData={updatedAnswersData} />
 			</>
-			<form action="" className="replyFormStyle card" onSubmit={handleReply}>
+			<form
+				action=""
+				className="replyFormStyle form-group"
+				onSubmit={handleReply}
+			>
 				<input
 					id="name"
+					className="form-control input1"
 					type="text"
 					name="name"
-					className="input1"
-					placeholder="write your name"
+					placeholder="Write your name here..."
+					autoComplete="off"
 					onChange={(e) => setName(e.target.value)}
 					required
 				/>
-				<textarea
-					id="reply"
-					name="reply"
-					placeholder="Write your reply here..."
-					rows="5"
-					cols="33"
+				<Editor
+					wrapperClassName="wrapper"
+					editorClassName="editor"
+					toolbarClassName="toolbar"
+					// id="reply"
+					// className="form-control"
+					// name="reply"
+					// placeholder="Write your reply here..."
 					onChange={(e) => setDescription(e.target.value)}
-				></textarea>
-				<button className="input2 btn-primary" type="submit" value="Submit"></button>
+				/>
+				<button className="input2 btn-danger">Reply</button>
 			</form>
 		</div>
 	);

@@ -3,13 +3,15 @@ import Answer from "../Answer/Answer";
 import Reply from "../Reply/Reply";
 import { questionsData } from "../../mock/data";
 
-const AnswersByIdThreads = ({ questionId, answersData }) => {
-	//const [answersData, setAnswersData] = useState(questionsData.answer);
+const AnswersByIdThreads = ({ questionId }) => {
+	const [answersData, setAnswersData] = useState(questionsData.answer);
 
-	// fetch(questionId);
-	// function fetchingAnswers() {
-	// 	fetch.then().then((data) => setAnswersData(data));
-	// }
+	//fetch(questionId);
+	function fetchingAnswers() {
+		fetch(questionId)
+			.then((res) => res.json())
+			.then((data) => setAnswersData(data));
+	}
 
 	const handleSendReply = (answer) => {
 		fetch
@@ -19,16 +21,16 @@ const AnswersByIdThreads = ({ questionId, answersData }) => {
 			.catch();
 	};
 
-	// useEffect(() => {
-	// 	fetchingAnswers();
-	// }, []);
+	useEffect(() => {
+		fetchingAnswers();
+	}, []);
 
 	return (
 		<div className="answersFormat">
 			{answersData.map((answer) => {
 				return <Answer key={answer.id} data={answer} />;
 			})}
-			<Reply onPress={handleSendReply} />
+			{/* <Reply onPress={handleSendReply} /> */}
 		</div>
 	);
 };
