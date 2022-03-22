@@ -164,3 +164,116 @@ html, body {
 } */
 
 
+.main {
+	background-color: lightblue;
+	min-height: 1000px;
+	/*text-align: center;*/
+}
+
+label, input {
+	/*display: flex;
+	flex-direction: column;*/
+	display: block;
+	size: 50px;
+	width: 100%;
+	margin: 10px;
+	
+}
+
+label {
+	color: white;
+	float: left;
+	font-size: 25px;
+}
+
+input {
+	height: 30px;
+	font-size: 20px;
+}
+
+h1, h2 {
+	color: white;
+	padding-top: 30px;
+	text-align: center;
+}
+
+button {
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: green;
+	color: white;
+	position: left;
+	font-size: 18px;
+}
+
+button:hover {
+	background-color: lightgreen;
+	color: black;
+}
+
+.categoryBtn {
+	width: 300px;
+	height: 40px;
+	margin: 10px;
+}
+
+.mainCatbtn {
+	height: auto;
+}
+
+form {
+	max-width: 600px;
+	/*position: relative;*/
+	margin: auto;
+	padding: auto;
+}
+
+#categoryDiv {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 20px;
+	margin: 10px;
+}
+
+.questionsDiv {
+	border: 1px solid black;
+	width: 80%;
+	margin: auto;
+	position: center;
+	min-height: 400px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+
+	background-color: white;
+}
+
+.navigation {
+	overflow: hidden;
+	min-width: 80%;
+}
+
+.top {
+	min-width: 80%;
+}
+
+ul {
+	list-style-type: none;
+	margin: 40px;
+	width: 300px;
+	padding: 0;
+	float: right;
+}
+
+ul li {
+	display: inline-block;
+	margin: 10px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	/*float: right;*/
+}
+

@@ -1,18 +1,46 @@
 import { Route, Routes } from "react-router-dom";
+import React /*{ useState }*/ from "react";
 
-import SelectedQtnThread from "./pages/AnswerThreads/SelectedQstThread";
-import ListedQtnThread from "./components/ListedQtnThread/ListedQthThread";
-import { questionsData } from "./mock/data.js";
+import Login from "./pages/Login";
+import About from "./pages/About";
+//import Home from "./pages/Home";
+import Main from "./pages/Main";
+import Signup from "./pages/Signup";
+//import useToken from "./components/useToken";
 
-//import About from "./pages/About";
-import Home from "./pages/Home";
+/*function setToken(userToken) {
+	sessionStorage.setItem("token", JSON.stringify(userToken));
+}
+function getToken() {
+	const tokenString = sessionStorage.getItem("token");
+	const userToken = JSON.parse(tokenString);
+	return userToken?.token;
+}*/
 
-const App = () => (
+const App = () => {
+
+	/* ## do not delete this part ## */
+
+
+	//const { token, setToken } = useToken();
+	//const [token, setToken] = useState();
+	//const token = getToken();
+
+	/*if(!token) {
+		return <Login setToken={setToken} />;
+	}*/
+
+	/* ## do not delete or update the part above ## */
+
+	return (
 	<Routes>
-		<Route path="/" element={<Home />} />
-		<Route path="/questions/answers" element={<SelectedQtnThread questionsData={questionsData} id={1} />} />
-		<Route path="/questions" element={<ListedQtnThread />} />
-	</Routes>
-);
+		<Route path="/" element={<Main />} />
+		<Route path="/Login" element={<Login />} />
 
+		<Route path="/Signup" element={<Signup />} />
+		<Route path="/about/this/site" element={<About />} />
+	</Routes>
+	);
+};
+//<Route path="/" element={<Home />} />
 export default App;
