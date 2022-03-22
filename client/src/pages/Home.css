@@ -96,7 +96,7 @@ html, body {
 .replyFormStyle input {
 	/* padding: 1rem;
 	border-radius: 4px; */
-	margin-top: 1rem;	
+	margin: 1rem 0;	
 }
 
 .replyFormStyle p {
@@ -138,8 +138,26 @@ html, body {
   border: 1px solid grey;
 }
 
-.editor{
-  background-color: lavender;
+/* .editor{
+  background-color: transparent;
+} */
+
+ .wrapper {
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+} 
+.editor {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.toolbar {
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 /* .highlight {
 	background-color: rgb(245, 245, 220, 0.5);

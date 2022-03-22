@@ -3,27 +3,27 @@ import Answer from "../Answer/Answer";
 import Reply from "../Reply/Reply";
 import { questionsData } from "../../mock/data";
 
-const AnswersByIdThreads = ({ questionId }) => {
-	const [answersData, setAnswersData] = useState(questionsData.answer);
+const AnswersByIdThreads = ({ questionId, answersData }) => {
+	//const [answersData, setAnswersData] = useState(questionsData.answer);
 
 	//fetch(questionId);
-	function fetchingAnswers() {
-		fetch(questionId)
-			.then((res) => res.json())
-			.then((data) => setAnswersData(data));
-	}
+	// function fetchingAnswers() {
+	// 	fetch(questionId)
+	// 		.then((res) => res.json())
+	// 		.then((data) => setAnswersData(data));
+	// }
 
-	const handleSendReply = (answer) => {
-		fetch
-			.post(answer)
-			.then()
-			.then(() => fetchingAnswers())
-			.catch();
-	};
+	// const handleSendReply = (answer) => {
+	// 	fetch
+	// 		.post(answer)
+	// 		.then()
+	// 		.then(() => fetchingAnswers())
+	// 		.catch();
+	// };
 
-	useEffect(() => {
-		fetchingAnswers();
-	}, []);
+	// useEffect(() => {
+	// 	fetchingAnswers();
+	// }, []);
 
 	return (
 		<div className="answersFormat">

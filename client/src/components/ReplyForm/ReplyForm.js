@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AnswersByIdThreads from "../AnswersById/AnswersByIdThreads";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -8,6 +9,9 @@ const ReplyForm = ({ replyData }) => {
 	const [description, setDescription] = useState("");
 	const [updatedAnswersData, setUpdatedAnswersData] = useState(
 		replyData.flat()
+	);
+	const [editorState, setEditorState] = useState(() =>
+		EditorState.createEmpty()
 	);
 
 	// const postReply = {
@@ -65,11 +69,21 @@ const ReplyForm = ({ replyData }) => {
 					wrapperClassName="wrapper"
 					editorClassName="editor"
 					toolbarClassName="toolbar"
+					editorState={editorState}
+					onEditorStateChange={setEditorState}
 					// id="reply"
 					// className="form-control"
 					// name="reply"
 					// placeholder="Write your reply here..."
-					onChange={(e) => setDescription(e.target.value)}
+					//onChange={(e) => setDescription(e.target.value)}
+					// editorState={editorState}
+					toolbar={{
+						inline: { inDropdown: true },
+						list: { inDropdown: true },
+						textAlign: { inDropdown: true },
+						link: { inDropdown: true },
+						history: { inDropdown: true },
+					}}
 				/>
 				<button className="input2 btn-danger">Reply</button>
 			</form>
