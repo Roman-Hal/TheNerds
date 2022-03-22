@@ -10,6 +10,7 @@
 	background-color: yellow;
 }
 
+
 .main {
 	background-color: lightblue;
 	min-height: 1000px;
@@ -91,6 +92,7 @@ form {
 	min-height: 400px;
 	margin-bottom: 20px;
 	margin-top: 10px;
+
 	background-color: white;
 }
 
@@ -121,3 +123,4 @@ a {
 	text-decoration: none;
 	/*float: right;*/
 }
+

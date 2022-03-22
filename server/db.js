@@ -4,15 +4,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
-
-
-
+const isProduction = process.env.NODE_ENV === "production";
+const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
 const pool = new Pool({
-	connectionString: dbUrl,
-	connectionTimeoutMillis: 5000,
-	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
+    connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
+    connectionTimeoutMillis: 5000,
+    ssl: {
+        rejectUnauthorized: false,
+    },
 });
+
+
+
 
 export const connectDb = async () => {
 	let client;
@@ -25,6 +28,7 @@ export const connectDb = async () => {
 	console.log("Postgres connected to", client.database);
 	client.release();
 };
+
 
 export const disconnectDb = () => pool.close();
 
