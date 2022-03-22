@@ -1,7 +1,8 @@
 //import React from "react";
 //import { Link } from "react-router-dom";
 import Navigation from "./Navigation";
-
+import SelectedQtnThread from "./AnswerThreads/SelectedQstThread";
+import ListedQtnThread from "../components/ListedQtnThread/ListedQthThread";
 import "./Home.css";
 
 const Main = () => {
@@ -11,19 +12,19 @@ const Main = () => {
   };*/
 
   return (
-    <main className="main" role="main">
-      <Navigation />
-      <div className="top">
-        <h1>TheNerds APP</h1>
-        <h1>Main</h1>
-    </div>
-        <div className="questionsDiv">
-          {/* ADD question module in this div */}
-
-
-        </div>
-    </main>
-  );
+		<main className="main" role="main">
+			<Navigation />
+			<div className="top">
+				<h1>TheNerds APP</h1>
+				<h1>Main</h1>
+			</div>
+			<div className="questionsDiv">
+				{/* ADD question module in this div */}
+				<SelectedQtnThread questionsData={questionsData} id={1} />
+				<ListedQtnThread />
+			</div>
+		</main>
+	);
 };
 
   /*return (
