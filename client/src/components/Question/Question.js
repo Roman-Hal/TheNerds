@@ -1,20 +1,9 @@
 import React from "react";
 
 function Question({ data, onPressQuestion }) {
-    // const [highlightRow, setHighlightRow] = useState(false);
-    // function highlightRowHandler(index) {
-	// 		if (index === highlightRow) {
-	// 			setHighlightRow(false);
-	// 		} else {
-	// 			setHighlightRow(index);
-	// 		}
-	// 	}
   return (
-		<div>
 			<div
 				className="questionStyle card m-3"
-				// className={highlightRow === index ? "highlight" : ""}
-				// onClick={(e) => highlightRowHandler(index)}
 			>
 				<h4 className="card-title">
 					<span>{data.owner}</span>
@@ -29,7 +18,6 @@ function Question({ data, onPressQuestion }) {
 					Reply
 				</button>
 			</div>
-		</div>
 	);
 }
 

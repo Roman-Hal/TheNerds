@@ -23,7 +23,13 @@ const ListedQtnThread = ({ onPressQuestion }) => {
 				{questionsData.map((question) => {
 					return (
 						<>
-							<button onClick={() => onPressQuestion(question.id)}><Question data={question} /></button>
+							{/* <button
+								className="tentative"
+								onClick={() => onPressQuestion(question.id)}
+							>
+								<Question data={question} />
+							</button> */}
+							<Question data={question} />
 						</>
 					);
 				})}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AnswersByIdThreads from "../AnswersById/AnswersByIdThreads";
 import { EditorState } from "draft-js";
+import { convertToHTML } from "draft-convert";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
@@ -37,12 +38,16 @@ const ReplyForm = ({ replyData }) => {
 
 	const handleReply = (e) => {
 		e.preventDefault();
+		console.log(editorState);
 		setUpdatedAnswersData((updatedAnswersData) => [
 			...updatedAnswersData,
-			{ description: description, owner: name },
+			{
+				description: convertToHTML(editorState.getCurrentContent()),
+				owner: name,
+			},
 		]);
 		e.target.children[0].value = "";
-		e.target.children[1].value = "";
+		setEditorState("");
 	};
 
 	return (
@@ -71,18 +76,17 @@ const ReplyForm = ({ replyData }) => {
 					toolbarClassName="toolbar"
 					editorState={editorState}
 					onEditorStateChange={setEditorState}
-					// id="reply"
-					// className="form-control"
-					// name="reply"
-					// placeholder="Write your reply here..."
-					//onChange={(e) => setDescription(e.target.value)}
-					// editorState={editorState}
+
 					toolbar={{
 						inline: { inDropdown: true },
 						list: { inDropdown: true },
 						textAlign: { inDropdown: true },
 						link: { inDropdown: true },
 						history: { inDropdown: true },
+						image: {
+							uploadCallback: uploadImageCallBack,
+							alt:{ present: true, mandatory: true } ,
+						},
 					}}
 				/>
 				<button className="input2 btn-danger">Reply</button>
