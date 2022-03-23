@@ -6,6 +6,9 @@ import { connectDb, disconnectDb } from "./db";
 const port = parseInt(process.env.PORT || "3000");
 
 const server = http.createServer(app);
+console.log({ port });
+
+
 
 server.on("listening", () => {
 	const addr = server.address();
