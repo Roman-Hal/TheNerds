@@ -1,10 +1,10 @@
 //import React from "react";
 //import { Link } from "react-router-dom";
 import Navigation from "./Navigation";
-import SelectedQtnThread from "./SelectedQtnThread/SelectedQtnThread";
-import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
+//import SelectedQtnThread from "./SelectedQtnThread/SelectedQtnThread";
+//import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
 import "./Home.css";
-import { questionsData } from "../mock/data";
+//import { questionsData } from "../mock/data";
 
 const Main = () => {
   /*const logout = () => {
@@ -21,7 +21,7 @@ const Main = () => {
 			</div>
 			<div className="questionsDiv">
 				{/* ADD question module in this div */}
-				<SelectedQtnThread questionsData={questionsData} id={1} />
+				{/*<SelectedQtnThread questionsData={questionsData} id={1} />*/}
 				{/* <ListedQtnThread /> */}
 			</div>
 		</main>

@@ -200,9 +200,15 @@ input {
 }
 
 h1, h2 {
-	color: white;
+	color: lightgrey;
 	padding-top: 30px;
 	text-align: center;
+}
+
+h1 {
+	-webkit-text-stroke: 0.6px black;
+
+	font-size: 35px;
 }
 
 button {
@@ -236,6 +242,7 @@ form {
 	/*position: relative;*/
 	margin: auto;
 	padding: auto;
+	margin-top: 20px;
 }
 
 #categoryDiv {

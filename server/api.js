@@ -8,7 +8,7 @@ import /*bcrypt,*/ { hash, compare } from "bcryptjs";
 //import app from "./app";
 
 
-import { questionsData } from "./Mock/Data";
+//import { questionsData } from "./Mock/Data";
 import db from "./db";
 
 const router = Router();

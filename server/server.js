@@ -1,12 +1,12 @@
 import http from "http";
-import data from "./Mock/Data";
+//import data from "./Mock/Data";
 import app from "./app";
 import { connectDb, disconnectDb } from "./db";
 
 const port = parseInt(process.env.PORT || "3000");
 
 const server = http.createServer(app);
-console.log({ port });
+//console.log({ port });
 
 
 
