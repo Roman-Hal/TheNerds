@@ -12,7 +12,7 @@ import "./Home.css";
 
 
 export function Home() {
-	const [message, setMessage] = useState("Loading...");
+	/*const [message, setMessage] = useState("Loading...");
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
 
@@ -45,7 +45,7 @@ export function Home() {
 		  .catch((err) => console.error(err));
 	  }, []);
 	  console.log(questions);
-	  console.log(answers);
+	  console.log(answers);*/
 
 
 	return (
