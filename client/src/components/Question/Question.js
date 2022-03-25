@@ -1,4 +1,5 @@
 import React from "react";
+import "./Question.css";
 
 function Question({ data, onPressQuestion }) {
   return (
@@ -14,9 +15,9 @@ function Question({ data, onPressQuestion }) {
 				<button
 					className="btn btn-danger"
 					onClick={() => onPressQuestion(data.id)}
-				>
-					Reply
+				><span>Reply</span>
 				</button>
+				<h6>replies</h6>
 			</div>
 	);
 }
