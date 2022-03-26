@@ -5,6 +5,8 @@ import Navigation from "./Navigation";
 //import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
 import "./Home.css";
 //import { questionsData } from "../mock/data";
+import Footer from "./Footer";
+
 
 const Main = () => {
   /*const logout = () => {
@@ -12,9 +14,15 @@ const Main = () => {
     navigate("/");
   };*/
 
+  //const onClick = () => {
+    //Navigate( { Onequestion } );
+    //<Link to="/Onequestion" />;
+  //};
+
   return (
+    <div className="containermain" >
+      <Navigation />
 		<main className="main" role="main">
-			<Navigation />
 			<div className="top">
 				<h1>TheNerds APP</h1>
 				<h1>Main</h1>
@@ -25,6 +33,8 @@ const Main = () => {
 				{/* <ListedQtnThread /> */}
 			</div>
 		</main>
+    <Footer />
+    </div>
 	);
 };
 

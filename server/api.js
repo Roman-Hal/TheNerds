@@ -38,6 +38,18 @@ router.get("/", verifyToken, (req, res) => {
 	});
 });
 
+//const queryUsers = "SELECT * FROM users";
+
+router.get("/users1", (req, res) => {
+    db.query("SELECT * FROM users", (error, result) => {
+        if(error) {
+            res.status(500).send(error);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
 
 router.get("/users", (req, res) => {
 	res.status(200).json(users);
@@ -129,6 +141,7 @@ router.post("/login", async (req, res) => {
 			});*/
 			jwt.sign({ data }, "secretkey", (err, token) => {
 				res.json({ msg: "Login successful", token });
+				console.log(token);
 			});
 		} else {
 			res.status(200).json( {
