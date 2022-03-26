@@ -1,0 +1,57 @@
+.askQuestionStyle label{
+    display: block;
+    color: black;
+	max-width: 100%;
+    padding: 0.5rem;
+}
+
+.askQuestionStyle input,
+.askQuestionStyle textarea{
+	max-width: 90%;
+}
+
+.askQuestionStyle {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   text-align: center;
+   background-color: whitesmoke;
+   position: absolute;
+   width: 40%;
+}
+
+.AskQtnCloseBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+}
+
+.AskQtnCloseBtn span{	
+	font-weight: bolder;
+	font-size: x-large;
+	color: brown;
+}
+
+.AskQtnCloseBtn:hover {
+	border: 1px solid brown;
+	padding: 0;
+	background-color: hsl(0, 59%, 41%, 0.3);
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: hsl(0, 0%, 0%, 0.9);  
+    z-index: 10;
+    width: 100%;
+    min-height: 1000px;
+}
+
+.hide {
+    display: none;
+}

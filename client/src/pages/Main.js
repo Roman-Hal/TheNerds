@@ -6,7 +6,8 @@ import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
 import Pagination from "../components/Pagination/Pagination";
 import "./Home.css";
 import { useState } from "react";
-import AskQuestion from "../components/AskQuestion/AskQuestion";
+// import AskQuestion from "../components/AskQuestion/AskQuestion";
+import AskQuestionForm from "../components/AskQuestionForm/AskQuestionForm";
 
 const Main = () => {
   /*const logout = () => {
@@ -16,6 +17,7 @@ const Main = () => {
   const [id, setId] = useState(null);
   const [show, setShow] = useState(false);
 
+
   const handleShow = () => {
     setShow(!show);
   };
@@ -23,7 +25,7 @@ const Main = () => {
 
   return (
       <main className="main" role="main">
-				{show === true && <AskQuestion show={show} />}
+				{show === true && <AskQuestionForm show={show} />}
 				<Navigation />
 				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
 				<div className="top">

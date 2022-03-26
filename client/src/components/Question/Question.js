@@ -12,12 +12,11 @@ function Question({ data, onPressQuestion }) {
 				</h4>
 				<p className="card-text">{data.description}</p>
 				<p>{data.timestamp}</p>
-				<button
+				{/* <button
 					className="btn btn-danger"
 					onClick={() => onPressQuestion(data.id)}
 				><span>Reply</span>
-				</button>
-				<h6>replies</h6>
+				</button> */}
 			</div>
 	);
 }
