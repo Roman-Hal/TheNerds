@@ -25,8 +25,8 @@ const Main = () => {
 
   return (
       <main className="main" role="main">
-				{show === true && <AskQuestionForm show={show} />}
 				<Navigation />
+				{show === true && <AskQuestionForm show={show} />}
 				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
 				<div className="top">
 					<h1>TheNerds APP</h1>
