@@ -3,9 +3,10 @@ import React, { useState } from "react";
 //import { render } from "react-dom";
 //import { Link } from "react-router-dom";
 //import PropTypes from "prop-types";
-import Navigation from "./Navigation";
+//import Navigation from "./Navigation";
 
-import "./Home.css";
+//import "./Home.css";
+import "./Loginmaintest.css";
 //import logo from "./logo.svg";
 
 async function loginUser(credentials) {
@@ -25,6 +26,7 @@ console.log(loginUser);
 export function Login({ setToken }) {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
+	const [ passwordShown, setPasswordShown ] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -33,6 +35,10 @@ export function Login({ setToken }) {
 			password,
 		});
 		setToken(token);
+	};
+
+	const togglePassword = () => {
+		setPasswordShown(!passwordShown);
 	};
 
 	//console.log(token);
@@ -55,28 +61,59 @@ export function Login({ setToken }) {
 			});
 	}, []);*/
 	return (
-		<main className="main" role="main">
-			<div><Navigation /></div>
+		<main className="inner-container" >
+			{/*<div><Navigation /></div>
 			<div>
-				<h1>TheNerds Q&A APP Login page</h1>
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label htmlFor='email' className="formLabel">Username</label>
-						<input type="email" id='email' placeholder='Email' className="formInput" onChange={(e) => setEmail(e.target.value)} />
+	<h1>TheNerds Q&A APP Login page</h1>*/}
+					<div className="header" >
+						Login
 					</div>
-					<div>
-						<label htmlFor='password' className="formLabel">Password</label>
-						<input type="password" id='password' placeholder='Password' className="formInput" onChange={(e) => setPassword(e.target.value)} />
+				<form className="box" onSubmit={handleSubmit}>
+					<div className="input-group">
+						<label htmlFor='email' className="login-label" >Username</label>
+						<input type="email" id='email' placeholder='Email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
+					</div>
+					<div className="input-group">
+						<label htmlFor='password' className="login-label">Password</label>
+						<input type={ passwordShown ? "text" : "password" } id='password' placeholder='Password' className="login-input" onChange={(e) => setPassword(e.target.value)} />
+						<p aria-hidden="true" onClick={ togglePassword } className="showpass">Show Password</p>
 					</div>
                     <div>
-                        <button type="submit">Submit</button>
+                        <button className="login-btn" type="submit">Submit</button>
                     </div>
 					</form>
-
-			</div>
+			{/*</div>*/}
 		</main>
 	);
 }
+
+// ### copy of the main file to be able to change it back ###
+
+/*return (
+	<main className="main" role="main">
+		{/*<div><Navigation /></div>
+		<div>
+<h1>TheNerds Q&A APP Login page</h1>*//*}
+			<form onSubmit={handleSubmit}>
+				<div>
+					<label htmlFor='email' className="formLabel">Username</label>
+					<input type="email" id='email' placeholder='Email' className="formInput" onChange={(e) => setEmail(e.target.value)} />
+				</div>
+				<div>
+					<label htmlFor='password' className="formLabel">Password</label>
+					<input type="password" id='password' placeholder='Password' className="formInput" onChange={(e) => setPassword(e.target.value)} />
+				</div>
+				<div>
+					<button type="submit">Submit</button>
+				</div>
+				</form>
+
+		{/*</div>*//*}
+	</main>
+);
+}*/
+
+
 //<Link to="/Signup"><button>Sign Up</button></Link>
 /*Login.propTypes = {
 	setToken: PropTypes.func.isRequired,
