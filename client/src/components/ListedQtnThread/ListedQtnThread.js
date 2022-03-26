@@ -1,10 +1,9 @@
-import React from "react";
+import React, { Pressable } from "react";
 import Question from "../Question/Question.js";
 import { questionsData } from "../../mock/data.js";
-
+import "./ListedQtnThread.css";
 
 const ListedQtnThread = ({ onPressQuestion }) => {
-	//const [id, setId] = useState(null);
 
 	//const[questionsData, setQuestionData] = useState();
 
@@ -23,13 +22,14 @@ const ListedQtnThread = ({ onPressQuestion }) => {
 				{questionsData.map((question) => {
 					return (
 						<>
-							{/* <button
+							<button
 								className="tentative"
 								onClick={() => onPressQuestion(question.id)}
 							>
-								<Question data={question} />
-							</button> */}
-							<Question data={question} />
+								<span>
+									<Question data={question} />
+								</span>
+							</button>
 						</>
 					);
 				})}
