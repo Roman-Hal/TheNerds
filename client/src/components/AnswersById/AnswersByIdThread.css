@@ -1,0 +1,15 @@
+.answersFormat {
+	border-left: 3px solid brown;
+	overflow-y: scroll;
+	scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+	scrollbar-color: rebeccapurple green;
+	height: 18vh;
+}
+
+h4 {
+	text-align: left;
+	font-size: large;
+	font-weight: bold;
+	color: brown;
+}
