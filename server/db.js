@@ -4,16 +4,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-//const isProduction = process.env.NODE_ENV === "production";
-//const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL, 
-    connectionTimeoutMillis: 5000,
-    ssl: {
-        rejectUnauthorized: false,
-    },
-});
+const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
+
+const pool = new Pool({
+	connectionString: dbUrl,
+	connectionTimeoutMillis: 5000,
+	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
+}); 
 
 
 

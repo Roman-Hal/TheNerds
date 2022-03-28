@@ -2,11 +2,10 @@
 import { Router } from "express";
 
 import jwt from "jsonwebtoken";
-import /*bcrypt,*/ { hash, compare } from "bcryptjs";
+import { /*bcrypt,*/ hash, compare } from "bcryptjs";
 //import asyncHandler from "express-async-handler";
 //import cors from "cors";
 //import app from "./app";
-
 
 import { questionsData } from "./Mock/Data";
 import db from "./db";
@@ -15,10 +14,10 @@ const router = Router();
 
 const users = [
 	{
-	username: "Huhu",
-	email: "test@123.test",
-	password: "$2a$10$t/9aytkxdQz8j27dDttVnek/fRqSiJnco9BgxwAmldZYj3WsW8UXK", //pass "test123"
-},
+		username: "Huhu",
+		email: "test@123.test",
+		password: "$2a$10$t/9aytkxdQz8j27dDttVnek/fRqSiJnco9BgxwAmldZYj3WsW8UXK", //pass "test123"
+	},
 ];
 
 /*router.get("/", verifyToken, (_, res) => {
@@ -27,7 +26,7 @@ const users = [
 
 router.get("/", verifyToken, (req, res) => {
 	jwt.verify(req.token, "secretkey", (err, authData) => {
-		if(err) {
+		if (err) {
 			res.sendStatus(403);
 		} else {
 			res.json({
@@ -37,7 +36,6 @@ router.get("/", verifyToken, (req, res) => {
 		}
 	});
 });
-
 
 router.get("/users", (req, res) => {
 	res.status(200).json(users);
@@ -55,23 +53,21 @@ router.get("/users", (req, res) => {
 router.post("/register", async (req, res) => {
 	const { username, email, password } = req.body;
 	try {
-
 		const user = users.find((user) => user.email === email);
-		if(user){
+		if (user) {
 			throw new Error("email already registered");
 		} else {
+			const hashedPassword = await hash(password, 10);
 
-		const hashedPassword = await hash(password, 10);
-
-		users.push({
-			username,
-			email,
-			password: hashedPassword,
-		});
-		res.status(200).json({ msg: "User created" });
-		console.log(users);
-	}
-	/*}
+			users.push({
+				username,
+				email,
+				password: hashedPassword,
+			});
+			res.status(200).json({ msg: "User created" });
+			console.log(users);
+		}
+		/*}
 	catch (err) {
 		res.json({ error: `${err.message}` });
 	}*/
@@ -94,11 +90,11 @@ router.post("/register", async (req, res) => {
 			/*res.status(200).json( {
 				msg: "Login successful!",
 			});*/
-			//JWT using timer
-			/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+//JWT using timer
+/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
 				res.json({ msg: "Login successful", token });
 			});*/
-			/*jwt.sign({ data }, "secretkey", (err, token) => {
+/*jwt.sign({ data }, "secretkey", (err, token) => {
 				res.json({ msg: "Login successful", token });
 			});
 		} else {
@@ -116,33 +112,33 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 	try {
-	let data = users.find((user) => user.email === email);
-	if(data) {
-		const valid = await compare(password, data.password);
-		if(valid) {
-			/*res.status(200).json( {
+		let data = users.find((user) => user.email === email);
+		if (data) {
+			const valid = await compare(password, data.password);
+			if (valid) {
+				/*res.status(200).json( {
 				msg: "Login successful!",
 			});*/
-			//JWT using timer
-			/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+				//JWT using timer
+				/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
 				res.json({ msg: "Login successful", token });
 			});*/
-			jwt.sign({ data }, "secretkey", (err, token) => {
-				res.json({ msg: "Login successful", token });
-			});
+				jwt.sign({ data }, "secretkey", (err, token) => {
+					res.json({ msg: "Login successful", token });
+				});
+			} else {
+				res.status(200).json({
+					msg: "Wrong password!",
+				});
+			}
 		} else {
-			res.status(200).json( {
-				msg: "Wrong password!",
+			res.status(200).json({
+				msg: "User not found!",
 			});
 		}
-	} else {
-		res.status(200).json( {
-			msg: "User not found!",
-		});
+	} catch (err) {
+		res.json({ msg: `${err}` });
 	}
-} catch (err) {
-	res.json({ msg: `${err}` });
-}
 });
 
 //app.post("/logout", )
@@ -155,7 +151,7 @@ function verifyToken(req, res, next) {
 	//get authentication header value
 	const bearerHeader = req.headers["authorization"];
 	//Check if bearer is undefined
-	if(typeof bearerHeader !== "undefined") {
+	if (typeof bearerHeader !== "undefined") {
 		//Split at the space
 		const bearer = bearerHeader.split(" ");
 		//Get token from array
@@ -171,20 +167,10 @@ function verifyToken(req, res, next) {
 }
 
 const questionsQuery = "SELECT * FROM questions";
-const answersQuery = "SELECT * FROM answers";
 
 router.get("/questions", async (req, res) => {
 	try {
 		const result = await db.query(questionsQuery);
-		res.json(result.rows);
-	} catch (error) {
-		res.status(500).send(error);
-	}
-});
-
-router.get("/answers", async (req, res) => {
-	try {
-		const result = await db.query(answersQuery);
 		res.json(result.rows);
 	} catch (error) {
 		res.status(500).send(error);
@@ -207,11 +193,9 @@ router.get("/questions/:id", async (req, res) => {
 			const exists = result.rows.map((el) => el.exists);
 			let doesExist = exists.pop();
 			if (!doesExist) {
-				res
-					.status(404)
-					.json({
-						message: `A question by the id ${questionsId} does not exist!`,
-					});
+				res.status(404).json({
+					message: `A question by the id ${questionsId} does not exist!`,
+				});
 			} else {
 				db.query(questionsById)
 					.then((result) => res.json(result.rows))
@@ -219,76 +203,127 @@ router.get("/questions/:id", async (req, res) => {
 			}
 		});
 	}
+});
 
+//getting answers by Question id //
+router.get("/answers/:id", async (req, res) => {
+	const questionId = req.params.id;
+	const answersByQId = `SELECT * FROM answers WHERE question_id=${questionId}`;
+	const checkIfExists = `select exists(select 1 from answers where id=${questionId})`;
+	if (!isValid(questionId)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else {
+		db.query(checkIfExists).then((result) => {
+			const exists = result.rows.map((el) => el.exists);
+			let doesExist = exists.pop();
+			if (!doesExist) {
+				res.status(404).json({
+					message: `answers by the question id ${questionId} does not exist!`,
+				});
+			} else {
+				db.query(answersByQId)
+					.then((result) => res.json(result.rows))
+					.catch((e) => console.error(e));
+			}
+		});
+	}
 });
 
 //Api endpoint for updating questions
 
-router.patch ("/questions", (req, res) => {
-	const updatedTitle = req.body.title;
-	const updatedQuestion = req.body.question_content;
+router.patch("/questions", async (req, res) => {
+	const title = req.body.title;
+	const content = req.body.content;
 	const id = req.body.id;
-	console.log(req.body.title)
-	let updateQuestionQuery;
-	if (updatedTitle) updateQuestionQuery = `UPDATE questions SET title=${updatedTitle}, question_content=${updatedQuestion} WHERE id=${id}`;
-    else if (!updatedTitle) updateQuestionQuery = `UPDATE questions SET question_content=${updatedQuestion} WHERE id=${id}`;
-	db.query(updateQuestionQuery)
-	.then(() => {
-		res.status(201).json({message: "Your Question is Successfully Updated!"})
-	})
-})
+	let questionUpdateQuery;
+	if (!isValid(id)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else if (title && isValid(id)) {
+		questionUpdateQuery =
+			"UPDATE questions SET title=$1, content=$2 WHERE id=$3";
+		try {
+			await db.query(questionUpdateQuery, [title, content, id]);
+			res.status(200).send({
+				Success: "Your question including the title is successfully updated!",
+			});
+		} catch (error) {
+			res.status(500).send(error);
+		}
+	} else if (!title && isValid(id)) {
+		questionUpdateQuery = "UPDATE questions SET content=$1 WHERE id=$2";
+		try {
+			await db.query(questionUpdateQuery, [content, id]);
+			res.status(200).send({
+				Success: "Your question is successfully updated!",
+			});
+		} catch (error) {
+			res.status(500).send(error);
+		}
+	}
+});
 
+//Api endpoint for updating answers
 
+router.patch("/answers", async (req, res) => {
+	const title = req.body.title;
+	const content = req.body.content;
+	const id = req.body.id;
+	let questionUpdateQuery;
+	if (!isValid(id)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else if (title && isValid(id)) {
+		questionUpdateQuery = "UPDATE answers SET title=$1, content=$2 WHERE id=$3";
+		try {
+			await db.query(questionUpdateQuery, [title, content, id]);
+			res.status(200).send({
+				Success: "Your answer including the title is successfully updated!",
+			});
+		} catch (error) {
+			res.status(500).send(error);
+		}
+	} else if (!title && isValid(id)) {
+		questionUpdateQuery = "UPDATE answers SET content=$1 WHERE id=$2";
+		try {
+			await db.query(questionUpdateQuery, [content, id]);
+			res.status(200).send({
+				Success: "Your answer is successfully updated!",
+			});
+		} catch (error) {
+			res.status(500).send(error);
+		}
+	}
+});
 
+// endpoint for post questions
 
+router.post("/questions", async (req, res) => {
+	const category = req.body.category;
+	const title = req.body.title;
+	const content = req.body.content;
+	const query =
+		"INSERT INTO questions (category, title, content) VALUES ($1,$2,$3)";
+	try {
+		await db.query(query, [category, title, content]);
+		res.status(201).send({ Success: "Your Question is Successfully Posted!" });
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
 
+//endpoint for post answers
 
-
-
-
-
-// Endpoint post 
-
-
-
-
-
-
-//Endoint to edit user's question    
-
-// router.put ('/userAsked/:id', async (req, res) => {
-// 	console.log ('body = ' + req.body.question + 'params-id = ' + req.params.id);
-// 	try {
-// 	  const id = req.params.id;
-// 	  const question = req.body.question;
-// 	  const updateQuestion = await db.query (
-// 		'update question set question = $1 where id = $1',
-// 		[question, id]
-// 	  );
-// 	  res.json ('Question updated');
-// 	} catch (err) {
-// 	  console.error (err.message);
-// 	}
-//   });
-
-
-//Endoint to edit a user's answer          
-
-// router.put ('/userAnswers/:id', async (req, res) => {
-//   console.log ('body = ' + req.body + 'params-id = ' + req.params.id);
-//   try {
-//     const id = req.params.id;
-//     const answer = req.body.answer;
-//     const updateAnswer = await db.query (
-//       'update answer set answer = $1 where id = $2',
-//       [answer, id]
-//     );
-//     res.json ('Answer updated');
-//   } catch (err) {
-//     console.error (err.message);
-//   }
-// });
-
-
+router.post("/answers", async (req, res) => {
+	const category = req.body.category;
+	const title = req.body.title;
+	const content = req.body.content;
+	const query =
+		"INSERT INTO answers (category, title, content) VALUES ($1,$2,$3)";
+	try {
+		await db.query(query, [category, title, content]);
+		res.status(201).send({ Success: "Your Answer is Successfully Posted!" });
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
 
 export default router;
