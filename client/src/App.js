@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import React /*{ useState }*/ from "react";
-
 import Login from "./pages/Login";
 import About from "./pages/About";
 //import Home from "./pages/Home";
 import Main from "./pages/Main";
 import Signup from "./pages/Signup";
+import Loginmain from "./pages/Loginmain";
 //import useToken from "./components/useToken";
 
 /*function setToken(userToken) {
@@ -33,13 +33,15 @@ const App = () => {
 	/* ## do not delete or update the part above ## */
 
 	return (
-	<Routes>
-		<Route path="/" element={<Main />} />
-		<Route path="/Login" element={<Login />} />
-
-		<Route path="/Signup" element={<Signup />} />
-		<Route path="/about/this/site" element={<About />} />
+		<Routes>
+			<Route path="/" element={<Main />} />
+			<Route path="/Login" element={<Login />} />
+		  <Route path="/Signup" element={<Signup />} />
+		  <Route path="/Loginmain" element={<Loginmain />} />
+		  <Route path="/about/this/site" element={<About />} />
 	</Routes>
+
+			
 	);
 };
 //<Route path="/" element={<Home />} />

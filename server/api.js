@@ -6,8 +6,8 @@ import { /*bcrypt,*/ hash, compare } from "bcryptjs";
 //import asyncHandler from "express-async-handler";
 //import cors from "cors";
 //import app from "./app";
+//import { questionsData } from "./Mock/Data";
 
-import { questionsData } from "./Mock/Data";
 import db from "./db";
 
 const router = Router();
@@ -36,6 +36,19 @@ router.get("/", verifyToken, (req, res) => {
 		}
 	});
 });
+
+//const queryUsers = "SELECT * FROM users";
+
+router.get("/users1", (req, res) => {
+    db.query("SELECT * FROM users", (error, result) => {
+        if(error) {
+            res.status(500).send(error);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
 
 router.get("/users", (req, res) => {
 	res.status(200).json(users);
@@ -123,6 +136,7 @@ router.post("/login", async (req, res) => {
 				/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
 				res.json({ msg: "Login successful", token });
 			});*/
+        
 				jwt.sign({ data }, "secretkey", (err, token) => {
 					res.json({ msg: "Login successful", token });
 				});
@@ -131,6 +145,12 @@ router.post("/login", async (req, res) => {
 					msg: "Wrong password!",
 				});
 			}
+
+			jwt.sign({ data }, "secretkey", (err, token) => {
+				res.json({ msg: "Login successful", token });
+				console.log(token);
+			});
+
 		} else {
 			res.status(200).json({
 				msg: "User not found!",

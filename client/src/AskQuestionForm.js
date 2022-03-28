@@ -20,7 +20,7 @@ async function postData(url = "", data = {}) {
 }
 
 postData("http://localhost:3100/api/form", { answer: 42 })
-  .then(data => {
+  .then((data) => {
     console.log(data); // JSON data parsed by `data.json()` call
   });
 
