@@ -166,9 +166,10 @@ function verifyToken(req, res, next) {
 	}
 }
 
-const questionsQuery = "SELECT * FROM questions";
+
 
 router.get("/questions", async (req, res) => {
+	const questionsQuery = "SELECT * FROM questions";
 	try {
 		const result = await db.query(questionsQuery);
 		res.json(result.rows);
@@ -296,7 +297,7 @@ router.patch("/answers", async (req, res) => {
 
 // endpoint for post questions
 
-router.post("/questions", async (req, res) => {
+router.post("/question", async (req, res) => {
 	const category = req.body.category;
 	const title = req.body.title;
 	const content = req.body.content;
@@ -312,18 +313,69 @@ router.post("/questions", async (req, res) => {
 
 //endpoint for post answers
 
-router.post("/answers", async (req, res) => {
-	const category = req.body.category;
-	const title = req.body.title;
-	const content = req.body.content;
+router.post("/answer", async (req, res) => {
+	const questionId = req.body.question_id;
+	const content = req.body.answer_content;
 	const query =
-		"INSERT INTO answers (category, title, content) VALUES ($1,$2,$3)";
+		"INSERT INTO answers (content, question_id) VALUES ($1,$2)";
 	try {
-		await db.query(query, [category, title, content]);
+		await db.query(query, [content, questionId]);
 		res.status(201).send({ Success: "Your Answer is Successfully Posted!" });
 	} catch (error) {
 		res.status(500).send(error);
 	}
 });
+
+
+// endpoint delete questions
+router.delete("/questions/:id", async (req, res) => {
+	const questionId = req.params.id;
+	const deleteById = `DELETE FROM questions WHERE id=${questionId}`;
+	const checkIfExists = `select exists(select 1 from questions where id=${questionId})`;
+	if (!isValid(questionId)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else {
+		db.query(checkIfExists).then((result) => {
+			const exists = result.rows.map((el) => el.exists);
+			let doesExist = exists.pop();
+			if (!doesExist) {
+				res.status(404).json({
+					message: `A question by the id ${questionId} does not exist!`
+				});
+			} else {
+				db.query(deleteById)
+					.then(() => res.json({message: `A question by the id ${questionId} is Successfully deleted!`}))
+					.catch((e) => console.error(e));
+			}
+		});
+	}
+});
+
+//endpoint for delete answers
+router.delete("/answers/:id", async (req, res) => {
+	const answerId = req.params.id;
+	const deleteById = `DELETE FROM answers WHERE id=${answerId}`;
+	const checkIfExists = `select exists(select 1 from answers where id=${answerId})`;
+	if (!isValid(answerId)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else {
+		db.query(checkIfExists).then((result) => {
+			const exists = result.rows.map((el) => el.exists);
+			let doesExist = exists.pop();
+			if (!doesExist) {
+				res.status(404).json({
+					message: `A answer by the id ${answerId} does not exist!`
+				});
+			} else {
+				db.query(deleteById)
+					.then(() => res.json({message: `An answer by the id ${answerId} is Successfully deleted!`}))
+					.catch((e) => console.error(e));
+			}
+		});
+	}
+});
+
+
+
 
 export default router;
