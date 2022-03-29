@@ -6,7 +6,6 @@ dotenv.config();
 
 const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
-
 const pool = new Pool({
 	connectionString: dbUrl,
 	connectionTimeoutMillis: 5000,

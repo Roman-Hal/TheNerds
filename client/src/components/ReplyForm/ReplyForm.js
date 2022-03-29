@@ -1,19 +1,30 @@
 import React, { useState } from "react";
-import AnswersByIdThreads from "../AnswersById/AnswersByIdThreads";
+import AnswersByIdThreads from "../AnswersById/AnswersByIdThread";
+import "./ReplyForm.css";
 import { EditorState } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import DOMPurify from "dompurify";
 
 const ReplyForm = ({ replyData }) => {
 	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
+	// const [description, setDescription] = useState("");
 	const [updatedAnswersData, setUpdatedAnswersData] = useState(
 		replyData.flat()
 	);
 	const [editorState, setEditorState] = useState(() =>
 		EditorState.createEmpty()
 	);
+	const [convertedContent, setConvertedContent] = useState(null);
+	const handleEditorChange = (state) => {
+		setEditorState(state);
+		convertContentToHTML();
+	};
+	const convertContentToHTML = () => {
+		let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+		setConvertedContent(currentContentAsHTML);
+	};
 
 	// const postReply = {
 	// 	newName: name,
@@ -38,16 +49,20 @@ const ReplyForm = ({ replyData }) => {
 
 	const handleReply = (e) => {
 		e.preventDefault();
-		console.log(editorState);
 		setUpdatedAnswersData((updatedAnswersData) => [
 			...updatedAnswersData,
 			{
-				description: convertToHTML(editorState.getCurrentContent()),
+				description: convertedContent,
 				owner: name,
 			},
 		]);
 		e.target.children[0].value = "";
 		setEditorState("");
+	};
+	const createMarkup = (html) => {
+		return {
+			__html: DOMPurify.sanitize(html),
+		};
 	};
 
 	return (
@@ -75,17 +90,23 @@ const ReplyForm = ({ replyData }) => {
 					editorClassName="editor"
 					toolbarClassName="toolbar"
 					editorState={editorState}
-					onEditorStateChange={setEditorState}
-
+					onEditorStateChange={handleEditorChange} /*setEditorState*/
 					toolbar={{
 						inline: { inDropdown: true },
 						list: { inDropdown: true },
 						textAlign: { inDropdown: true },
-						link: { inDropdown: true },
+						//link: { inDropdown: true },
 						history: { inDropdown: true },
+						link: {
+							visible: true,
+							inDropdown: true,
+							addLink: { visible: true },
+							removeLink: { visible: true },
+						},
 						image: {
-							uploadCallback: uploadImageCallBack,
-							alt:{ present: true, mandatory: true } ,
+							visible: true,
+							fileUpload: true,
+							url: true,
 						},
 					}}
 				/>

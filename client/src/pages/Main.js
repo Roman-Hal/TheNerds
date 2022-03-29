@@ -1,30 +1,60 @@
 //import React from "react";
 //import { Link } from "react-router-dom";
 import Navigation from "./Navigation";
-import SelectedQtnThread from "./SelectedQtnThread/SelectedQtnThread";
+import SelectedQtnThread from "../components/SelectedQtnThread/SelectedQtnThread";
 import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
+import Pagination from "../components/Pagination/Pagination";
 import "./Home.css";
-import { questionsData } from "../mock/data";
+
+//import { questionsData } from "../mock/data";
+import Footer from "./Footer";
+import { useState } from "react";
+// import AskQuestion from "../components/AskQuestion/AskQuestion";
+import AskQuestionForm from "../components/AskQuestionForm/AskQuestionForm";
+
 
 const Main = () => {
   /*const logout = () => {
     window.localStorage.clear();
     navigate("/");
   };*/
+  const [id, setId] = useState(null);
+  const [show, setShow] = useState(false);
+
+
+  const handleShow = () => {
+    setShow(!show);
+  };
+
+
+  //const onClick = () => {
+    //Navigate( { Onequestion } );
+    //<Link to="/Onequestion" />;
+  //};
 
   return (
+
+    <div className="containermain" >
+      <Navigation />
 		<main className="main" role="main">
-			<Navigation />
+    {show === true && <AskQuestionForm show={show} />}
+				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
 			<div className="top">
 				<h1>TheNerds APP</h1>
 				<h1>Main</h1>
 			</div>
 			<div className="questionsDiv">
 				{/* ADD question module in this div */}
-				<SelectedQtnThread questionsData={questionsData} id={1} />
-				{/* <ListedQtnThread /> */}
+					{typeof id === "number" && <SelectedQtnThread id={id} />}
+					<ListedQtnThread
+						onPressQuestion={(questionId) => setId(questionId)}
+					/>
+					<Pagination />
 			</div>
 		</main>
+    <Footer />
+    </div>
+      
 	);
 };
 
