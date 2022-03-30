@@ -1,0 +1,71 @@
+.questionStyle p{
+	text-align: justify;
+	color: black;
+}
+
+.questionStyle p:nth-child(3) {
+	color: DarkSlateGrey;
+}
+
+.questionStyle h4{
+	text-align: left;
+	font-size: large;
+	font-weight: lighter;
+	color: brown;
+}
+
+.questionStyle span{
+	margin-right: 0.7rem;
+	font-weight: bold;
+
+}
+
+.questionStyle{
+	padding: 1rem;
+
+}
+
+/* .questionStyle button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  border-radius: 4px;
+  background-color: brown;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+  width: 20%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.questionStyle button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.questionStyle button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.questionStyle button:hover span {
+  padding-right: 25px;
+}
+
+.questionStyle button:hover span:after {
+  opacity: 1;
+  right: 0;
+} */
+
+.questionStyle:hover{
+	background-color: rgb(0, 0, 0,0.1);
+
+}

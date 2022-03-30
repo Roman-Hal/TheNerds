@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 //import { Link } from "react-router-dom";
 
 //import Navigation from "./Navigation";
@@ -7,11 +7,13 @@ import { Navigate } from "react-router-dom";
 //import "./Home.css";
 import "./Loginmaintest.css";
 
-const Signup = () => {
-	const [username, setUsername] = useState();
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+const Signup = ({ onAdd }) => {
+	const [ username, setUsername ] = useState("");
+	const [ email, setEmail ] = useState("");
+	const [ password, setPassword ] = useState("");
 	const [ passwordShown, setPasswordShown ] = useState();
+
+	//const navigate = useNavigate();
 
 
 	const togglePassword = () => {
@@ -19,7 +21,7 @@ const Signup = () => {
 	};
 
 
-	const handleSubmit = async (e) => {
+	/*const handleSubmit = async (e) => {
 		e.preventDefault();
 		const result = await (await fetch("http://localhost:3100/api/register", {
 			method: "POST",
@@ -34,11 +36,24 @@ const Signup = () => {
 		})).json();
 
 		if(!result.error) {
-			console.log(result.message);
-			Navigate("/Login");
+			console.log(result);
+			setUsername("");
+			setEmail("");
+			setPassword("");
+			navigate("/Loginmain");
+			//window.location.reload();
 		} else {
 			console.log(result.error);
 		}
+	};*/
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		onAdd({ username, email, password });
+
+		setUsername("");
+		setEmail("");
+		setPassword("");
 	};
 
 
@@ -52,7 +67,7 @@ const Signup = () => {
 					</div>
                     <div className="input-group">
 						<label htmlFor='email' className="login-label" >E-mail</label>
-						<input type="email" id='username' placeholder='email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
+						<input type="email" id='email' placeholder='email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className="input-group">
 						<label htmlFor='password' className="login-label" >Password</label>
