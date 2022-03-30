@@ -6,6 +6,7 @@
 
 .listedQtnThreadFormat button {
   border: none; 
+  padding: 0;
 }
 
 .questionStyle:hover{
@@ -17,7 +18,7 @@
 .listedQtnThreadFormat {
   display: flex;
   flex-direction: column;
-  min-height: 70vh;
+  height: 80vh;
   overflow-y: scroll;
 	scrollbar-color: rebeccapurple green;
   scrollbar-width: thin;
