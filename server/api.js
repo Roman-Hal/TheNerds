@@ -94,7 +94,7 @@ router.post("/register", async (req, res) => {
 			const hashedPassword = await hash(password, 10);
 
 
-		const hashedPassword = await hash(password, 10);
+		//const hashedPassword = await hash(password, 10);
 
 		users.push({
 			username,
@@ -449,11 +449,10 @@ router.delete("/questions/:id", async (req, res) => {
 			let doesExist = exists.pop();
 			if (!doesExist) {
 				res.status(404).json({
-					message: `A question by the id ${questionId} does not exist!`
-				});
+					message: `A question by the id ${questionId} does not exist!` });
 			} else {
 				db.query(deleteById)
-					.then(() => res.json({message: `A question by the id ${questionId} is Successfully deleted!`}))
+					.then(() => res.json({ message: `A question by the id ${questionId} is Successfully deleted!` }))
 					.catch((e) => console.error(e));
 			}
 		});
@@ -473,11 +472,10 @@ router.delete("/answers/:id", async (req, res) => {
 			let doesExist = exists.pop();
 			if (!doesExist) {
 				res.status(404).json({
-					message: `A answer by the id ${answerId} does not exist!`
-				});
+					message: `A answer by the id ${answerId} does not exist!` });
 			} else {
 				db.query(deleteById)
-					.then(() => res.json({message: `An answer by the id ${answerId} is Successfully deleted!`}))
+					.then(() => res.json({ message: `An answer by the id ${answerId} is Successfully deleted!` }))
 					.catch((e) => console.error(e));
 			}
 		});
