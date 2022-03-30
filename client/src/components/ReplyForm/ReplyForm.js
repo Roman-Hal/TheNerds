@@ -44,6 +44,11 @@ const ReplyForm = ({ questionId }) => {
 			console.error(err.message);
 		}
 	};
+	// const createMarkup = (html) => {
+	// 	return {
+	// 		__html: DOMPurify.sanitize(html),
+	// 	};
+	// };
 
 
 	// const handleReply = (e) => {

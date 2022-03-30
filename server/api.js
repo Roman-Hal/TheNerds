@@ -6,8 +6,8 @@ import { /*bcrypt,*/ hash, compare } from "bcryptjs";
 //import asyncHandler from "express-async-handler";
 //import cors from "cors";
 //import app from "./app";
-
 //import { questionsData } from "./Mock/Data";
+
 import db from "./db";
 
 const router = Router();
@@ -122,33 +122,38 @@ router.post("/register", async (req, res) => {
 });*/
 
 router.post("/login", async (req, res) => {
-	const { email, password } = req.body;
-	try {
-		let data = users.find((user) => user.email === email);
-		if (data) {
-			const valid = await compare(password, data.password);
-			if (valid) {
-				/*res.status(200).json( {
-				msg: "Login successful!",
-			});*/
-				//JWT using timer
-				/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
-				res.json({ msg: "Login successful", token });
-			});*/
-
-			jwt.sign({ data }, "secretkey", (err, token) => {
-				res.json({ msg: "Login successful", token });
-				console.log(token);
-			})
-		} else {
-			res.status(200).json({
-				msg: "User not found!",
-			});
-		}
-	} catch (err) {
-		res.json({ msg: `${err}` });
-	}
+    const { email, password } = req.body;
+    try {
+    let data = users.find((user) => user.email === email);
+    if(data) {
+        const valid = await compare(password, data.password);
+        if(valid) {
+            /*res.status(200).json( {
+                msg: "Login successful!",
+            });*/
+            //JWT using timer
+            /*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+                res.json({ msg: "Login successful", token });
+            });*/
+            jwt.sign({ data }, "secretkey", (err, token) => {
+                res.json({ msg: "Login successful", token });
+                console.log(token);
+            });
+        } else {
+            res.status(200).json( {
+                msg: "Wrong password!",
+            });
+        }
+    } else {
+        res.status(200).json( {
+            msg: "User not found!",
+        });
+    }
+} catch (err) {
+    res.json({ msg: `${err}` });
+}
 });
+
 
 //app.post("/logout", )
 
@@ -175,56 +180,8 @@ function verifyToken(req, res, next) {
 	}
 }
 
-// // Post question
-// router.post("/question", function (req, res) {
-// 	const title = req.body.title;
-// 	const content = req.body.content;
 
-// 	if (!title || !content) {
-// 		return res
-// 			.status(400)
-// 			.send("Please, enter title or question");
-// 	}
 
-// 	db
-// 	.query("SELECT * FROM questions WHERE title=$1", [title])
-// 	.then((result) => {
-// 		if (result.rows.length > 0) {
-// 			return res
-// 				.status(400)
-// 				.send("A question with the same title already exists!");
-// 		} else {
-// 			const query =
-// 				"INSERT INTO questions (title, content) VALUES ($1, $2)";
-// 			db
-// 			.query(query, [title, content])
-// 			.then(() => res.send("question created!"))
-// 			.catch((error) => {
-// 					console.error(error);
-// 						res.status(500).json(error);
-// 				});
-// 		}
-// 	});
-// });
-
-// //Post reply
-// router.post("/reply", function (req, res) {
-// 	const reply = req.body.content;
-
-// 	if (!reply) {
-// 		return res.status(400).send("Please, enter reply");
-// 	}
-// 		const query = "INSERT INTO answers (content) VALUES ($1)";
-// 		db
-// 		.query(query, [reply])
-// 		.then(() => res.send("reply created!"))
-// 		.catch((error) => {
-// 			console.error(error);
-// 			res.status(500).json(error);
-// 		});
-// });
-
-//Get all questions
 router.get("/questions", async (req, res) => {
 	const questionsQuery = "SELECT * FROM questions";
 	try {
@@ -235,20 +192,10 @@ router.get("/questions", async (req, res) => {
 	}
 });
 
-//Gell all answers
-router.get("/answers", async (req, res) => {
-	const answersQuery = "SELECT * FROM answers";
-	try {
-		const result = await db.query(answersQuery);
-		res.json(result.rows);
-	} catch (error) {
-		res.status(500).send(error);
-	}
-});
-
 const isValid = (n) => {
 	return !isNaN(n) && n >= 0;
 };
+
 //getting questions by id //
 router.get("/questions/:id", async (req, res) => {
 	const questionsId = req.params.id;
@@ -273,11 +220,11 @@ router.get("/questions/:id", async (req, res) => {
 	}
 });
 
-//Get all answers by questionId
+//getting answers by Question id //
 router.get("/answers/:id", async (req, res) => {
 	const questionId = req.params.id;
-	const questionsById = `SELECT * FROM answers WHERE question_id=${questionId}`;
-	const checkIfExists = `select exists(select 1 from answers where question_id=${questionId})`;
+	const answersByQId = `SELECT * FROM answers WHERE question_id=${questionId}`;
+	const checkIfExists = `select exists(select 1 from answers where id=${questionId})`;
 	if (!isValid(questionId)) {
 		res.status(400).json({ "Server message": "Invalid id!" });
 	} else {
@@ -286,10 +233,10 @@ router.get("/answers/:id", async (req, res) => {
 			let doesExist = exists.pop();
 			if (!doesExist) {
 				res.status(404).json({
-					message: `A question by the id ${questionId} does not exist!`,
+					message: `answers by the question id ${questionId} does not exist!`,
 				});
 			} else {
-				db.query(questionsById)
+				db.query(answersByQId)
 					.then((result) => res.json(result.rows))
 					.catch((e) => console.error(e));
 			}
@@ -298,6 +245,7 @@ router.get("/answers/:id", async (req, res) => {
 });
 
 //Api endpoint for updating questions
+
 router.patch("/questions", async (req, res) => {
 	const title = req.body.title;
 	const content = req.body.content;
@@ -361,7 +309,8 @@ router.patch("/answers", async (req, res) => {
 });
 
 // endpoint for post questions
-router.post("/questions", async (req, res) => {
+
+router.post("/question", async (req, res) => {
 	const category = req.body.category;
 	const title = req.body.title;
 	const content = req.body.content;
@@ -376,17 +325,67 @@ router.post("/questions", async (req, res) => {
 });
 
 //endpoint for post answers
+
 router.post("/answer", async (req, res) => {
-    const questionId = req.body.question_id;
-    const content = req.body.answer_content;
-    const query =
-        "INSERT INTO answers (content, question_id) VALUES ($1,$2)";
-    try {
-        await db.query(query, [content, questionId]);
-        res.status(201).send({ Success: "Your Answer is Successfully Posted!" });
-    } catch (error) {
-        res.status(500).send(error);
-    }
+	const questionId = req.body.question_id;
+	const content = req.body.answer_content;
+	const query =
+		"INSERT INTO answers (content, question_id) VALUES ($1,$2)";
+	try {
+		await db.query(query, [content, questionId]);
+		res.status(201).send({ Success: "Your Answer is Successfully Posted!" });
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
+
+// endpoint delete questions
+router.delete("/questions/:id", async (req, res) => {
+	const questionId = req.params.id;
+	const deleteById = `DELETE FROM questions WHERE id=${questionId}`;
+	const checkIfExists = `select exists(select 1 from questions where id=${questionId})`;
+	if (!isValid(questionId)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else {
+		db.query(checkIfExists).then((result) => {
+			const exists = result.rows.map((el) => el.exists);
+			let doesExist = exists.pop();
+			if (!doesExist) {
+				res.status(404).json({
+					message: `A question by the id ${questionId} does not exist!`
+				});
+			} else {
+				db.query(deleteById)
+					.then(() => res.json({message: `A question by the id ${questionId} is Successfully deleted!`}))
+					.catch((e) => console.error(e));
+			}
+		});
+	}
+});
+
+//endpoint for delete answers
+router.delete("/answers/:id", async (req, res) => {
+	const answerId = req.params.id;
+	const deleteById = `DELETE FROM answers WHERE id=${answerId}`;
+	const checkIfExists = `select exists(select 1 from answers where id=${answerId})`;
+	if (!isValid(answerId)) {
+		res.status(400).json({ "Server message": "Invalid id!" });
+	} else {
+		db.query(checkIfExists).then((result) => {
+			const exists = result.rows.map((el) => el.exists);
+			let doesExist = exists.pop();
+			if (!doesExist) {
+				res.status(404).json({
+					message: `A answer by the id ${answerId} does not exist!`
+				});
+			} else {
+				db.query(deleteById)
+					.then(() => res.json({message: `An answer by the id ${answerId} is Successfully deleted!`}))
+					.catch((e) => console.error(e));
+			}
+		});
+	}
 });
 
 // endpoint delete questions
@@ -497,5 +496,7 @@ router.delete("/answers/:id", async (req, res) => {
 		});
 	}
 });
+
+
 
 export default router;
