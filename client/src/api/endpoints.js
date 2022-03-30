@@ -9,3 +9,4 @@ export const endpoints = {
     DELETE_QUESTION: () => "/questions/:id", 
     DELETE_ANSWER: () => "/answers/:id"
 };
+

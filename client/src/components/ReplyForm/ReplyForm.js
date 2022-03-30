@@ -7,12 +7,12 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import DOMPurify from "dompurify";
 
-const ReplyForm = ({ replyData }) => {
-	const [name, setName] = useState("");
+const ReplyForm = ({ questionId }) => {
+	//const [name, setName] = useState("");
 	// const [description, setDescription] = useState("");
-	const [updatedAnswersData, setUpdatedAnswersData] = useState(
-		replyData.flat()
-	);
+	// const [updatedAnswersData, setUpdatedAnswersData] = useState(
+	// 	replyData.flat()
+	// );
 	const [editorState, setEditorState] = useState(() =>
 		EditorState.createEmpty()
 	);
@@ -26,38 +26,23 @@ const ReplyForm = ({ replyData }) => {
 		setConvertedContent(currentContentAsHTML);
 	};
 
-	// const postReply = {
-	// 	newName: name,
-	// 	newDescription: description,
-	// };
-	// fetch("/", {
-	// 	method: "POST",
-	// 	headers: {
-	// 		Accept: "application/json",
-	// 		"Content-Type": "application/json",
-	// 	},
 
-	// 	body: JSON.stringify(postReply),
-	// })
-	// 	.then((res) => {
-	// 		if (res.ok) {
-	// 			return res.json();
-	// 		}
-	// 	})
-	// 	.then((data) => setUpdatedAnswersData(data));
-	//window.location.reload(true); // Refreshes the page.
-
-	const handleReply = (e) => {
+	// body:{question_id:1, answer_content:'asdadsadas'}
+	const onSubmitReply = async (e) => {
 		e.preventDefault();
-		setUpdatedAnswersData((updatedAnswersData) => [
-			...updatedAnswersData,
-			{
-				description: convertedContent,
-				owner: name,
-			},
-		]);
-		e.target.children[0].value = "";
-		setEditorState("");
+		try {
+			const body = { question_id: questionId, answer_content: convertedContent };
+				await fetch("http://localhost:3100/api/answer", {
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+					//"Content-Type": "application/x-www-form-urlencoded",
+				},
+				body: JSON.stringify(body),
+			});
+		} catch (err) {
+			console.error(err.message);
+		}
 	};
 	// const createMarkup = (html) => {
 	// 	return {
@@ -65,15 +50,34 @@ const ReplyForm = ({ replyData }) => {
 	// 	};
 	// };
 
+
+	// const handleReply = (e) => {
+	// 	e.preventDefault();
+	// 	setUpdatedAnswersData((updatedAnswersData) => [
+	// 		...updatedAnswersData,
+	// 		{
+	// 			description: convertedContent,
+	// 			owner: name,
+	// 		},
+	// 	]);
+	// 	e.target.children[0].value = "";
+	// 	setEditorState("");
+	// };
+	const createMarkup = (html) => {
+		return {
+			__html: DOMPurify.sanitize(html),
+		};
+	};
+
 	return (
 		<div>
 			<>
-				<AnswersByIdThreads answersData={updatedAnswersData} />
+				<AnswersByIdThreads questionId={questionId} />
 			</>
 			<form
 				action=""
 				className="replyFormStyle form-group"
-				onSubmit={handleReply}
+				onSubmit={onSubmitReply}
 			>
 				<input
 					id="name"
@@ -82,7 +86,7 @@ const ReplyForm = ({ replyData }) => {
 					name="name"
 					placeholder="Write your name here..."
 					autoComplete="off"
-					onChange={(e) => setName(e.target.value)}
+					//onChange={(e) => setName(e.target.value)}
 					required
 				/>
 				<Editor
