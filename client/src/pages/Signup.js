@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 //import { Link } from "react-router-dom";
 
-import Navigation from "./Navigation";
+//import Navigation from "./Navigation";
 
-import "./Home.css";
+//import "./Home.css";
+import "./Loginmaintest.css";
 
 const Signup = () => {
 	const [username, setUsername] = useState();
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
+	const [ passwordShown, setPasswordShown ] = useState();
+
+
+	const togglePassword = () => {
+		setPasswordShown(!passwordShown);
+	};
 
 
 	const handleSubmit = async (e) => {
@@ -28,7 +35,7 @@ const Signup = () => {
 
 		if(!result.error) {
 			console.log(result.message);
-			Navigate("/");
+			Navigate("/Login");
 		} else {
 			console.log(result.error);
 		}
@@ -36,6 +43,31 @@ const Signup = () => {
 
 
   return (
+    <main className="inner-container" role="main">
+				<div className="header">Register</div>
+				<form className="box" onSubmit={ handleSubmit } >
+                    <div className="input-group">
+						<label htmlFor='username' className="login-label" >Username</label>
+						<input type="text" id='username' placeholder='Username' className="login-input" onChange={(e) => setUsername(e.target.value)} />
+					</div>
+                    <div className="input-group">
+						<label htmlFor='email' className="login-label" >E-mail</label>
+						<input type="email" id='username' placeholder='email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
+					</div>
+					<div className="input-group">
+						<label htmlFor='password' className="login-label" >Password</label>
+						<input type={ passwordShown ? "text" : "password" } id='password' placeholder='Password' className="login-input" onChange={(e) => setPassword(e.target.value)} />
+						<p aria-hidden="true" onClick={ togglePassword } className="showpass">Show Password</p>
+					</div>
+						<button className="login-btn" type="submit">Sign Up</button>
+					</form>
+		</main>
+  );
+};
+
+// ### Copy of the main file to be able to change it back ###
+
+/*return (
     <main className="main" role="main">
 		<Navigation />
 			<div>
@@ -58,7 +90,7 @@ const Signup = () => {
 			</div>
 		</main>
   );
-};
+};*/
 
 //<Link to="/"><button>Sign Up</button></Link>
 export default Signup;

@@ -5,6 +5,7 @@ import About from "./pages/About";
 //import Home from "./pages/Home";
 import Main from "./pages/Main";
 import Signup from "./pages/Signup";
+import Loginmain from "./pages/Loginmain";
 //import useToken from "./components/useToken";
 
 /*function setToken(userToken) {
@@ -35,10 +36,12 @@ const App = () => {
 		<Routes>
 			<Route path="/" element={<Main />} />
 			<Route path="/Login" element={<Login />} />
+		  <Route path="/Signup" element={<Signup />} />
+		  <Route path="/Loginmain" element={<Loginmain />} />
+		  <Route path="/about/this/site" element={<About />} />
+	</Routes>
 
-			<Route path="/Signup" element={<Signup />} />
-			<Route path="/about/this/site" element={<About />} />
-		</Routes>
+			
 	);
 };
 //<Route path="/" element={<Home />} />
