@@ -122,33 +122,38 @@ router.post("/register", async (req, res) => {
 });*/
 
 router.post("/login", async (req, res) => {
-	const { email, password } = req.body;
-	try {
-		let data = users.find((user) => user.email === email);
-		if (data) {
-			const valid = await compare(password, data.password);
-			if (valid) {
-				/*res.status(200).json( {
-				msg: "Login successful!",
-			});*/
-				//JWT using timer
-				/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
-				res.json({ msg: "Login successful", token });
-			});*/
-
-			jwt.sign({ data }, "secretkey", (err, token) => {
-				res.json({ msg: "Login successful", token });
-				console.log(token);
-			})
-		} else {
-			res.status(200).json({
-				msg: "User not found!",
-			});
-		}
-	} catch (err) {
-		res.json({ msg: `${err}` });
-	}
+    const { email, password } = req.body;
+    try {
+    let data = users.find((user) => user.email === email);
+    if(data) {
+        const valid = await compare(password, data.password);
+        if(valid) {
+            /*res.status(200).json( {
+                msg: "Login successful!",
+            });*/
+            //JWT using timer
+            /*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+                res.json({ msg: "Login successful", token });
+            });*/
+            jwt.sign({ data }, "secretkey", (err, token) => {
+                res.json({ msg: "Login successful", token });
+                console.log(token);
+            });
+        } else {
+            res.status(200).json( {
+                msg: "Wrong password!",
+            });
+        }
+    } else {
+        res.status(200).json( {
+            msg: "User not found!",
+        });
+    }
+} catch (err) {
+    res.json({ msg: `${err}` });
+}
 });
+
 
 //app.post("/logout", )
 
