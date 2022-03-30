@@ -5,17 +5,34 @@ import Signup from "./Signup";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 
+import { useNavigate } from "react-router-dom";
+
 //import "./Loginmain.css";
 import "./Loginmaintest.css";
 
 
-const Loginmain = () => {
+const Loginmain = ({ setToken }) => {
     /*const logout = () => {
       window.localStorage.clear();
       navigate("/");
     };*/
     const [ loginOpen, setLoginOpen ] = useState(true);
     const [ registerOpen, setRegisterOpen ] = useState(false);
+
+    //const navigate = useNavigate();
+
+    async function loginUser(credentials) {
+      return fetch("http://localhost:3100/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      })
+      .then((data)=> data.json());
+    }
+
+
 
     const showLoginBox = () => {
       setLoginOpen(true);
@@ -26,6 +43,32 @@ const Loginmain = () => {
       setLoginOpen(false);
       setRegisterOpen(true);
     };
+
+    const navigate = useNavigate();
+
+    const signup = async ({ username, email, password }) => {
+      const result = await(await fetch("http://localhost:3100/api/register", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username,
+				email,
+				password,
+			}),
+      //body: JSON.stringify(item),
+		})).json();
+
+    if(!result.error) {
+			console.log(result);
+			navigate("/Loginmain");
+			//window.location.reload();
+		} else {
+			console.log(result.error);
+		}
+    };
+
 
     /*const onMouse = () => {
      this.{ backgroundColor: "red" };
@@ -44,7 +87,7 @@ const Loginmain = () => {
             </div>
         </div>
         <div className="box-container">
-          { loginOpen ? <Login /> : registerOpen ? <Signup /> : null }
+          { loginOpen ? <Login setToken={ setToken } loginUser={ loginUser } /> : registerOpen ? <Signup onAdd={ signup } /> : null }
       </div>
       </div>
         <Footer  />

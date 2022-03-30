@@ -32,6 +32,8 @@ const Main = () => {
     //<Link to="/Onequestion" />;
   //};
 
+
+
   return (
 
     <div className="containermain" >
@@ -54,7 +56,7 @@ const Main = () => {
 		</main>
     <Footer />
     </div>
-      
+
 	);
 };
 

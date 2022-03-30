@@ -4,12 +4,13 @@ import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 //import PropTypes from "prop-types";
 //import Navigation from "./Navigation";
+import { useNavigate } from "react-router-dom";
 
 //import "./Home.css";
 import "./Loginmaintest.css";
 //import logo from "./logo.svg";
 
-async function loginUser(credentials) {
+/*async function loginUser(credentials) {
 	return fetch("http://localhost:3100/api/login", {
 		method: "POST",
 		headers: {
@@ -18,15 +19,19 @@ async function loginUser(credentials) {
 		body: JSON.stringify(credentials),
 	})
 	.then((data)=> data.json());
-}
+}*/
 
-console.log(loginUser);
+/*console.log(loginUser);*/
 //"access-control-allow-origin": "*",
 
-export function Login({ setToken }) {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+export function Login({ loginUser, setToken }) {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const [ passwordShown, setPasswordShown ] = useState(false);
+
+	const navigate = useNavigate();
+
+	console.log(loginUser);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -34,12 +39,18 @@ export function Login({ setToken }) {
 			email,
 			password,
 		});
+		console.log(token);
 		setToken(token);
+		setEmail("");
+		setPassword("");
+		navigate("/");
+		//window.location.reload();
 	};
 
 	const togglePassword = () => {
 		setPasswordShown(!passwordShown);
 	};
+
 
 	//console.log(token);
 
@@ -71,11 +82,11 @@ export function Login({ setToken }) {
 				<form className="box" onSubmit={handleSubmit}>
 					<div className="input-group">
 						<label htmlFor='email' className="login-label" >Username</label>
-						<input type="email" id='email' placeholder='Email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
+						<input value={email} type="email" id='email' placeholder='Email' className="login-input" onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className="input-group">
 						<label htmlFor='password' className="login-label">Password</label>
-						<input type={ passwordShown ? "text" : "password" } id='password' placeholder='Password' className="login-input" onChange={(e) => setPassword(e.target.value)} />
+						<input value={password} type={ passwordShown ? "text" : "password" } id='password' placeholder='Password' className="login-input" onChange={(e) => setPassword(e.target.value)} />
 						<p aria-hidden="true" onClick={ togglePassword } className="showpass">Show Password</p>
 					</div>
                     <div>

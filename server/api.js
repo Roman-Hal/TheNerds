@@ -24,10 +24,25 @@ const users = [
 	res.json({ message: "Hello, world!" });
 });*/
 
-router.get("/", verifyToken, (req, res) => {
+/*router.get("/", verifyToken, (req, res) => {
 	jwt.verify(req.token, "secretkey", (err, authData) => {
 		if (err) {
 			res.sendStatus(403);
+		} else {
+			res.json({
+				msg: "Hello, world!",
+				authData,
+			});
+		}
+	});
+});*/
+
+//testing
+
+router.get("/", verifyToken, (req, res) => {
+	jwt.verify(req.token, "secretkey", (err, authData) => {
+		if(err) {
+			res.sendStatus(403); //or can be used res.status(403).json({ msg: "Invalid token" });
 		} else {
 			res.json({
 				msg: "Hello, world!",
@@ -64,28 +79,39 @@ router.get("/users", (req, res) => {
 }));*/
 router.post("/register", async (req, res) => {
 	const { username, email, password } = req.body;
+	const user = users.find((user) => user.email === email);
 	try {
-		const user = users.find((user) => user.email === email);
-		if (user) {
-			throw new Error("email already registered");
+
+		if(!username || !email || !password){
+			res.status(400).json({ msg: "Please fill all fields" });
+		} else {
+
+		//const user = users.find((user) => user.email === email);
+		if(user){
+			res.status(400).json({ msg: "email already registered" });
+			//throw new Error("email already registered");
 		} else {
 			const hashedPassword = await hash(password, 10);
 
-			users.push({
-				username,
-				email,
-				password: hashedPassword,
-			});
-			res.status(200).json({ msg: "User created" });
-			console.log(users);
+
+		const hashedPassword = await hash(password, 10);
+
+		users.push({
+			username,
+			email,
+			password: hashedPassword,
+		});
+		res.status(200).json({ msg: "User created" });
+		console.log(users);
 		}
-		/*}
+	}
+	/*}
 	catch (err) {
 		res.json({ error: `${err.message}` });
 	}*/
 	} catch (err) {
-		res.json({ msg: "Please fill all fields!" });
-		//throw new Error({ error: `${ err }` });
+		//res.json({ msg: "Please fill all fields!" });
+		throw new Error({ error: `${ err }` });
 	}
 });
 
@@ -122,44 +148,89 @@ router.post("/register", async (req, res) => {
 });*/
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    try {
-    let data = users.find((user) => user.email === email);
-    if(data) {
-        const valid = await compare(password, data.password);
-        if(valid) {
-            /*res.status(200).json( {
-                msg: "Login successful!",
-            });*/
-            //JWT using timer
-            /*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
-                res.json({ msg: "Login successful", token });
-            });*/
-            jwt.sign({ data }, "secretkey", (err, token) => {
-                res.json({ msg: "Login successful", token });
-                console.log(token);
-            });
-        } else {
-            res.status(200).json( {
-                msg: "Wrong password!",
-            });
-        }
-    } else {
-        res.status(200).json( {
-            msg: "User not found!",
-        });
-    }
+
+	const { email, password } = req.body;
+	try {
+	let data = users.find((user) => user.email === email);
+	if(data) {
+		const valid = await compare(password, data.password);
+		if(valid) {
+			/*res.status(200).json( {
+				msg: "Login successful!",
+			});*/
+			//JWT using timer
+			/*jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
+				res.json({ msg: "Login successful", token });
+			});*/
+			//all data format
+			/*jwt.sign({ data }, "secretkey", (err, token) => {
+				res.json({ msg: "Login successful", token });
+				console.log(token);
+			});*/
+			//grab part of the jwt data
+			/*jwt.sign({ data: { username: data.username, email: data.email } }, "secretkey", { expiresIn: "15s" }, (err, token) => {
+				res.json({ msg: "Login succesful", token });
+			});*/
+
+			//creating accesToken with refresh token
+			const token = await jwt.sign({ data: { username: data.username, email: data.email } }, "secretkey", { expiresIn: "15s" },
+			);
+			const refreshToken = await jwt.sign({ data: { username: data.username, email: data.email } }, "refreshsecretkey", { expiresIn: "1m" }, );
+				refreshTokens.push(refreshToken);
+				res.json({ token, refreshToken, data: { username: data.username } });
+		} else {
+			res.status(400).json( {
+				msg: "Wrong password!",
+			});
+		}
+	} else {
+		res.status(400).json( {
+			msg: "User not found!",
+		});
+	}
 } catch (err) {
     res.json({ msg: `${err}` });
 }
 });
 
 
-//app.post("/logout", )
+// only for use with the acces and refresh token version
+let refreshTokens = [];
+
+router.post("/token", async (req, res) => {
+	const refreshToken = req.header("x-auth-token");
+
+	if(!refreshToken) {
+		res.status(401).json({ msg: "Token not found" } );
+	}
+	if(!refreshToken.includes(refreshToken)) {
+		res.status(403).json({ msg: "Invalid refresh Token" });
+	}
+
+	try {
+		const user = await jwt.verify(
+			refreshToken, "refreshsecretkey"
+		);
+		const { data } = user;
+		const token = await jwt.sign({ data: { username: data.username, email: data.email } }, "secretkey", { expiresIn: "20s" });
+		res.json({ token });
+	} catch (error) {
+		res.status(403).json({ msg: "Invalid token" });
+	}
+});
+
+router.post("/logout", (req, res) => {
+	const refreshToken = req.header("x-auth-token");
+
+	refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+	res.sendStatus(204);
+});
+
 
 // Token format
 // Authorization: Bearer <access_token>
 
+//One way to authenticate token
 //verify token
 function verifyToken(req, res, next) {
 	//get authentication header value
@@ -179,6 +250,31 @@ function verifyToken(req, res, next) {
 		res.status(403).json({ msg: "not authorized!" });
 	}
 }
+
+
+//Second way to authenticate the token
+
+/*const authToken = async (req, res, next) => {
+	const token = req.header["x-auth-token"];
+
+		//not token error message
+		if(!token) {
+			res.status(401).json({ error: { msg: "no token found" } } );
+		}
+
+		//token validation
+		try {
+			const user = await jwt.verify(token, "secretkey");
+			req.user = user.email;//, user.name;
+			next();
+		} catch (error) {
+			res.status(403).json({ error, msg: "Invalid token" } );
+		}
+
+	};*/
+
+//const questionsQuery = "SELECT * FROM questions";
+//const answersQuery = "SELECT * FROM answers";
 
 
 
