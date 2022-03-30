@@ -56,6 +56,7 @@ const Main = () => {
 		</main>
     <Footer />
     </div>
+      
 	);
 };
 
