@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Answer from "../Answer/Answer";
-import Reply from "../Reply/Reply";
+//import Reply from "../Reply/Reply";
 import "./AnswersByIdThread.css";
-import { questionsData } from "../../mock/data";
+//import { questionsData } from "../../mock/data";
 
-const AnswersByIdThreads = ({ questionId, answersData }) => {
-	//const [answersData, setAnswersData] = useState(questionsData.answer);
+const AnswersByIdThreads = ({ questionId }) => {
+	const [answers, setAnswers] = useState([]);
 
-	//fetch(questionId);
+	// console.log(questionId);
+	// fetch(questionId);
 	// function fetchingAnswers() {
 	// 	fetch(questionId)
 	// 		.then((res) => res.json())
-	// 		.then((data) => setAnswersData(data));
+	// 		.then((data) => setAnswers(data));
 	// }
 
 	// const handleSendReply = (answer) => {
@@ -26,17 +27,21 @@ const AnswersByIdThreads = ({ questionId, answersData }) => {
 	// 	fetchingAnswers();
 	// }, []);
 
+	useEffect(() => {
+		fetch(`http://localhost:3100/api/answers/${questionId}`)
+			.then((res) => res.json())
+			.then((data) => setAnswers(data))
+			.catch((err) => console.error(err));
+	}, [questionId]);
+
+	console.log(answers);
 	return (
 		<div>
-			<h4>
-				{answersData.length === 0
-					? `${answersData.length} Answers`
-					: `${answersData.length} Answers`}
-			</h4>
+			<h4>Answer(s)</h4>
 			<div className="answersFormat">
-				{answersData.map((answer) => {
-					return <Answer key={answer.id} data={answer} />;
-				})}
+				{/* {answers.map((answer) => { */}
+					<Answer key={questionId} data={answers} />
+				{/* })} */}
 				{/* <Reply onPress={handleSendReply} /> */}
 			</div>
 		</div>

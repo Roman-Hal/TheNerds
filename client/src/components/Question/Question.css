@@ -1,11 +1,8 @@
-.questionStyle p{
+/* .questionStyle p{
 	text-align: justify;
 	color: black;
-}
+} */
 
-.questionStyle p:nth-child(3) {
-	color: DarkSlateGrey;
-}
 
 .questionStyle h4{
 	text-align: left;
@@ -14,9 +11,25 @@
 	color: brown;
 }
 
+.questionStyle h6{
+	font-weight: bolder;
+	color: #CD5C5C;
+  margin-right: 0.5rem;
+}
+
+.subQtnStyle {
+  display: flex;
+  justify-content: space-around;
+}
+
+.subQtnStyle p {
+  color: darkslategray;
+}
+
 .questionStyle span{
-	margin-right: 0.7rem;
-	font-weight: bold;
+	/* margin-right: 0.7rem;
+	font-weight: bold; */
+  color: DarkSlateGrey;
 
 }
 
@@ -69,3 +82,4 @@
 	background-color: rgb(0, 0, 0,0.1);
 
 }
+

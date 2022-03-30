@@ -1,23 +1,23 @@
-import React, { Pressable } from "react";
+import React, { useState, useEffect, Pressable } from "react";
 import Question from "../Question/Question.js";
-import { questionsData } from "../../mock/data.js";
+//import { questionsData } from "../../mock/data.js";
 import "./ListedQtnThread.css";
 
 const ListedQtnThread = ({ onPressQuestion }) => {
 
-	//const[questionsData, setQuestionData] = useState();
+	const[questionsData, setQuestionData] = useState(null);
 
-	// useEffect(() => {
-	// 	fetch()
-	// 		.then((res) => {
-	// 			if (res.ok) {
-	// 				return res.json();
-	// 			}
-	// 		})
-	// 		.then((data) => setQuestionData(data));
-	// });
+	useEffect(() => {
+		fetch("http://localhost:3100/api/questions")
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				}
+			})
+			.then((data) => setQuestionData(data));
+	}, []);
 
-    return (
+    return questionsData?(
 			<div className="listedQtnThreadFormat">
 				{questionsData.map((question) => {
 					return (
@@ -34,7 +34,7 @@ const ListedQtnThread = ({ onPressQuestion }) => {
 					);
 				})}
 			</div>
-		);
+		): null;
 };
 
 export default ListedQtnThread;
