@@ -1,6 +1,6 @@
 ## Naming Rules
 
-Name your PR like this: ISSUENUMBER-TITLE-YOURNAME
+Name your PR like this: ISSUENUMBER-MR-KRISHAN-KUMAR
 
 ## Description
 

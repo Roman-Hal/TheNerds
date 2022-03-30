@@ -6,13 +6,13 @@ dotenv.config();
 
 const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
-
-
 const pool = new Pool({
 	connectionString: dbUrl,
 	connectionTimeoutMillis: 5000,
 	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
-});
+}); 
+
+
 
 export const connectDb = async () => {
 	let client;
@@ -25,6 +25,7 @@ export const connectDb = async () => {
 	console.log("Postgres connected to", client.database);
 	client.release();
 };
+
 
 export const disconnectDb = () => pool.close();
 

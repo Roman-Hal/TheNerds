@@ -1,0 +1,15 @@
+.questionByIdStyle h3{
+	text-align: left;
+	font-size: large;
+	font-weight: lighter;
+	color: brown;
+}
+
+.questionByIdStyle span{
+	margin-right: 1rem;
+	font-weight: bold;
+}
+
+.questionByIdStyle p{
+	text-align: justify;
+}
