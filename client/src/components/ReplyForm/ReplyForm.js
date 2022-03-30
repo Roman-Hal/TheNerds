@@ -59,11 +59,11 @@ const ReplyForm = ({ replyData }) => {
 		e.target.children[0].value = "";
 		setEditorState("");
 	};
-	const createMarkup = (html) => {
-		return {
-			__html: DOMPurify.sanitize(html),
-		};
-	};
+	// const createMarkup = (html) => {
+	// 	return {
+	// 		__html: DOMPurify.sanitize(html),
+	// 	};
+	// };
 
 	return (
 		<div>
