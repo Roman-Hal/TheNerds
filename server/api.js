@@ -37,6 +37,13 @@ const users = [
 	});
 });*/
 
+/*router.get("/me", verifyToken, async (req, res) => {
+	jwt.verify(req.token, "secretkey", (err, authData) => {
+		const { username, email } = await user.find(req.token.email)
+
+	});
+});*/
+
 //testing
 
 router.get("/", verifyToken, (req, res) => {
