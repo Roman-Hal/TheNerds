@@ -2,7 +2,7 @@
 	margin: 0.7rem auto;
 	width: 50%;
 	min-height: 80vh;
-	background-color: WhiteSmoke;
+	background-color: lightblue;
 	position: relative;
 }
 
@@ -19,7 +19,7 @@
 .close span{	
 	font-weight: bolder;
 	font-size: x-large;
-	color: brown;
+	color: rgb(218, 74, 22);
 }
 
 .close:hover {

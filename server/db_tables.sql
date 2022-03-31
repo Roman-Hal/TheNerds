@@ -17,6 +17,17 @@ CREATE TABLE answers (
   created_at TIMESTAMP,
   question_id INT REFERENCES questions (id)
 );
+/*
+CREATE TABLE answers (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users (id),
+  category VARCHAR(200),
+  title VARCHAR(200),
+  content TEXT NOT NULL,
+  created_at TIMESTAMP,
+  question_id INT REFERENCES questions (id)
+);
+*/
 
 
 
