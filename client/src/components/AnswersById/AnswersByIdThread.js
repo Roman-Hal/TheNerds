@@ -4,12 +4,13 @@ import Answer from "../Answer/Answer";
 import "./AnswersByIdThread.css";
 //import { questionsData } from "../../mock/data";
 
+const api = process.env.API_URL || "/api";
 const AnswersByIdThreads = ({ questionId }) => {
 	const [answers, setAnswers] = useState([]);
 
 
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/answers/${questionId}`)
+		fetch(`${api}/answers/${questionId}`)
 			.then((res) => res.json())
 			.then((data) => setAnswers(data))
 			.catch((err) => console.error(err));

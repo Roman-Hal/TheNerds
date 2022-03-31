@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Question.css";
 
+const api = process.env.API_URL || "/api";
 function Question({ data, onPressQuestion }) {
 	console.log(data.id);
 
 	const [answers, setAnswers] = useState({});
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/answers/${data.id}`)
+	fetch(`${api}/answers/${data.id}`)
 			.then((res) => res.json())
 			.then((data) => setAnswers(data))
 			.catch((err) => console.error(err));
