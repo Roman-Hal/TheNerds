@@ -7,11 +7,11 @@
 .questionStyle h4{
 	text-align: left;
 	font-size: large;
-	font-weight: lighter;
-	color: brown;
+	font-weight: bold;
+	color: rgb(218, 74, 22);
 }
 
-.questionStyle h6{
+.questionStyle h5{
 	font-weight: bolder;
 	color: #CD5C5C;
   margin-right: 0.5rem;
@@ -19,10 +19,10 @@
 
 .subQtnStyle {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
-.subQtnStyle p {
+.subQtnStyle h6{
   color: darkslategray;
 }
 
@@ -35,6 +35,7 @@
 
 .questionStyle{
 	padding: 1rem;
+  background-color: Cornsilk;
 
 }
 

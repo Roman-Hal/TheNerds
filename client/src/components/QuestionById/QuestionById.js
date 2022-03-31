@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./QuestionById.css";
 
+const api = process.env.API_URL || "/api";
 const QuestionById = ({ questionId }) => {
 	const [question, setQuestion] = useState(null);
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/questions/${questionId}`)
+		fetch(`${api}/questions/${questionId}`)
 				.then((res) => {
 					if (res.ok) {
 						return res.json();

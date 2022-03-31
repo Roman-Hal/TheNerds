@@ -3,12 +3,12 @@ import Question from "../Question/Question.js";
 //import { questionsData } from "../../mock/data.js";
 import "./ListedQtnThread.css";
 
+const api = process.env.API_URL || "/api";
 const ListedQtnThread = ({ onPressQuestion }) => {
-
 	const[questionsData, setQuestionData] = useState(null);
 
 	useEffect(() => {
-		fetch("http://localhost:3100/api/questions")
+		fetch(`${api}/questions`)
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
@@ -22,8 +22,7 @@ const ListedQtnThread = ({ onPressQuestion }) => {
 				{questionsData.map((question) => {
 					return (
 						<>
-							<button
-								className="tentative"
+							<button className="tentative"
 								onClick={() => onPressQuestion(question.id)}
 							>
 								<span>
