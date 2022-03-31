@@ -40,9 +40,10 @@ const Main = () => {
       <Navigation />
 		<main className="main" role="main">
     {show === true && <AskQuestionForm show={show} />}
-				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
+				<p>Login to <button className="btn btn-danger" onClick={handleShow}>Ask Question</button></p>
 			<div className="top">
-				<h1>TheNerds APP</h1>
+				<h1>TheNerds Q & A APP</h1>
+        <p className="main-p">ask technical related question about JS, HTML, CSS</p>
 				<h1>Main</h1>
 			</div>
 			<div className="questionsDiv">

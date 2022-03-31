@@ -21,15 +21,23 @@ const Loginmain = ({ setToken }) => {
 
     //const navigate = useNavigate();
 
+    const api = process.env.API_URL || "/api";
+
     async function loginUser(credentials) {
-      return fetch("http://localhost:3100/api/login", {
+      //return fetch("http://localhost:3100/api/login", {
+        return fetch(`${ api }/login`, { //possible workout for the heroku fetch("/api/login")
+        //return fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
       })
-      .then((data)=> data.json());
+      .then((data)=> data.json())
+      .then((data)=> {
+         console.log(data);
+        return data;
+        } );
     }
 
 
@@ -47,7 +55,8 @@ const Loginmain = ({ setToken }) => {
     const navigate = useNavigate();
 
     const signup = async ({ username, email, password }) => {
-      const result = await(await fetch("http://localhost:3100/api/register", {
+      //const result = await(await fetch("http://localhost:3100/api/register", {
+        const result = await(await fetch(`${ api }/register`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

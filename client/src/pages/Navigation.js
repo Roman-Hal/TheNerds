@@ -40,8 +40,8 @@ const logout = () => {
         <img className="logomain" src={LogoNerds} alt="Logo" />
         {/*<div className="logo">The Nerds</div>*/}
         <ul>
-            <li>Logged as: { token ? "User" : "Guest" }</li>
-            { token ? <button onClick={ logout }>Logout</button> : ( logName ? (<li><Link onClick={() => setLogName(!logName) } to="/" >Main</Link></li>) :
+            <li>Logged as: { token ? "Roman" : "Guest" }</li>
+            { token ? <button className="logout-button" onClick={ logout }>Logout</button> : ( logName ? (<li><Link onClick={() => setLogName(!logName) } to="/" >Home</Link></li>) :
            (<li><Link onClick={() => setLogName(!logName) } to="/Loginmain">Login/Register</Link></li>) )
     }
         </ul>
