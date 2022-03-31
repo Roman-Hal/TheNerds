@@ -1,6 +1,8 @@
 
 import React, { useState } from "react";
 import "./AskQuestionForm.css";
+
+const api = process.env.API_URL || "/api";
 const AskQuestionForm = ({ show }) => {
 
 // Example POST method implementation:
@@ -37,7 +39,7 @@ const AskQuestionForm = ({ show }) => {
 		e.preventDefault();
 		try {
 			const body = { title, content };
-			const response = await fetch("http://localhost:3100/api/question", {
+			const response = await fetch(`${api}/question`, {
 				method: "post",
 				headers: {
 					"Content-Type": "application/json",

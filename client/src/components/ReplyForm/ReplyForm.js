@@ -7,6 +7,7 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import DOMPurify from "dompurify";
 
+const api = process.env.API_URL || "/api";
 const ReplyForm = ({ questionId }) => {
 	//const [name, setName] = useState("");
 	// const [description, setDescription] = useState("");
@@ -32,7 +33,7 @@ const ReplyForm = ({ questionId }) => {
 		e.preventDefault();
 		try {
 			const body = { question_id: questionId, answer_content: convertedContent };
-				await fetch("http://localhost:3100/api/answer", {
+				await fetch(`${api}/answer`, {
 				method: "post",
 				headers: {
 					"Content-Type": "application/json",
