@@ -1,8 +1,8 @@
 .questionByIdStyle h3{
 	text-align: left;
 	font-size: large;
-	font-weight: lighter;
-	color: brown;
+	font-weight: bold;
+	color: rgb(218, 74, 22);
 }
 
 .questionByIdStyle span{

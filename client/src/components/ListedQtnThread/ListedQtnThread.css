@@ -9,20 +9,43 @@
   padding: 0;
 }
 
+
 .questionStyle:hover{
 	background-color: rgb(0, 0, 0,0.1);
 
 }
 
-
 .listedQtnThreadFormat {
   display: flex;
   flex-direction: column;
   height: 80vh;
-  overflow-y: scroll;
-	scrollbar-color: rebeccapurple green;
+  overflow-y: auto;
   scrollbar-width: thin;
-	scrollbar-color: rebeccapurple green;
+
+}
+.listedQtnThreadFormat::-webkit-scrollbar {
+ background-color: AliceBlue;;
+
+}
+
+.listedQtnThreadFormat::-webkit-scrollbar-button {
+ background-color: rgb(101, 197, 230);
+
+}
+
+.listedQtnThreadFormat::-webkit-scrollbar-thumb {
+ background-color: rgb(101, 197, 230);
+
+}
+/*
+overflow-y: scroll;
+	scrollbar-color: lightblue;/*rebeccapurple green;
+  scrollbar-width: thin;
+	scrollbar-color: lightblue;/*rebeccapurple green;
+  */
+
+.tentative {
+  background-color: lightblue;
 }
 
 

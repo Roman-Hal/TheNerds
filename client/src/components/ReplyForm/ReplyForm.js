@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AnswersByIdThreads from "../AnswersById/AnswersByIdThread";
 import "./ReplyForm.css";
 import { EditorState } from "draft-js";
-import { convertToHTML } from "draft-convert";
+//import { convertToHTML } from "draft-convert";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import DOMPurify from "dompurify";
@@ -16,22 +16,25 @@ const ReplyForm = ({ questionId }) => {
 	const [editorState, setEditorState] = useState(() =>
 		EditorState.createEmpty()
 	);
-	const [convertedContent, setConvertedContent] = useState(null);
-	const handleEditorChange = (state) => {
-		setEditorState(state);
-		convertContentToHTML();
-	};
-	const convertContentToHTML = () => {
-		let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-		setConvertedContent(currentContentAsHTML);
-	};
+	// const [convertedContent, setConvertedContent] = useState(null);
+	// const handleEditorChange = (state) => {
+	// 	setEditorState(state);
+	// 	convertContentToHTML();
+	// };
+	// const convertContentToHTML = () => {
+	// 	let currentContentAsHTML = convertToHTML();
+	// 	setConvertedContent(currentContentAsHTML);
+	// };
 
 
 	// body:{question_id:1, answer_content:'asdadsadas'}
 	const onSubmitReply = async (e) => {
 		e.preventDefault();
 		try {
-			const body = { question_id: questionId, answer_content: convertedContent };
+			const body = {
+				question_id: questionId,
+				answer_content: editorState.getCurrentContent(),
+			};
 				await fetch("http://localhost:3100/api/answer", {
 				method: "post",
 				headers: {
@@ -94,7 +97,8 @@ const ReplyForm = ({ questionId }) => {
 					editorClassName="editor"
 					toolbarClassName="toolbar"
 					editorState={editorState}
-					onEditorStateChange={handleEditorChange} /*setEditorState*/
+					onEditorStateChange={setEditorState}
+					/* handleEditorChange*/
 					toolbar={{
 						inline: { inDropdown: true },
 						list: { inDropdown: true },
@@ -114,7 +118,7 @@ const ReplyForm = ({ questionId }) => {
 						},
 					}}
 				/>
-				<button className="input2 btn-danger">Reply</button>
+				<button className="btn reply-btn">Reply</button>
 			</form>
 		</div>
 	);

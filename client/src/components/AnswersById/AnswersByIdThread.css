@@ -1,15 +1,26 @@
 .answersFormat {
-	border-left: 3px solid brown;
-	overflow-y: scroll;
-	scrollbar-color: rebeccapurple green;
+	border-left: 3px solid chocolate;
+	overflow-y: auto;
+	scrollbar-color: lightblue;/*rebeccapurple green;*/
     scrollbar-width: thin;
-	scrollbar-color: rebeccapurple green;
-	height: 18vh;
+	scrollbar-color: lightblue;/*rebeccapurple green;*/
+	height: 40vh;
+}
+
+.answersFormat::-webkit-scrollbar {
+	background-color: AliceBlue;
+}
+.answersFormat::-webkit-scrollbar-button {
+	background-color: rgb(101, 197, 230);
+}
+
+.answersFormat::-webkit-scrollbar-thumb {
+	background-color:rgb(101, 197, 230);
 }
 
 h4 {
 	text-align: left;
 	font-size: large;
 	font-weight: bold;
-	color: brown;
+	color: rgb(218, 74, 22);
 }
