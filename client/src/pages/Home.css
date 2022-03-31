@@ -7,7 +7,22 @@
 }
 
 html, body {
-	background-color: WhiteSmoke;
+	background-color: lightblue;
+}
+
+html::-webkit-scrollbar {
+ background-color: AliceBlue;;
+
+}
+
+html::-webkit-scrollbar-button {
+ background-color: rgb(101, 197, 230);
+
+}
+
+html::-webkit-scrollbar-thumb {
+ background-color: rgb(101, 197, 230);
+
 }
 /* .logo {
 	width: 100px;
@@ -22,59 +37,7 @@ html, body {
 } */
 
 
-/* .hideQtnByIdBtn:hover{
-	background-color: rgb(165, 42, 42, 0.7); /*brown*/
-	/* color: whitesmoke; */
-	
-
-/* }  */
-
-
-
-/* .wrapper{
-  border: 1px solid grey;
-} */
-
-
- .wrapper {
-  padding: 1rem;
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-} 
-.editor {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-/* .toolbar {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-} */
-
-.toolbar button{
-  background-color: brown;
-  color: black;
-  padding: 1rem;
-}
-
-.toolbar span{
-  color: darkslategray;
-}
-
-.rdw-link-modal-label {
-	color: darkslategray;
-}
-
-.rdw-link-modal-btn {
-	color: darkslategray;
-	background-color: deeppink;
-}
-
-
-/* Home css */
+ /* Home css */
 
 /*html, body, #root {
 	min-height: 100vh;
@@ -89,6 +52,18 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	min-height: calc(100vh - 40px);
+	width: 100%;	
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgb(139, 69, 19, 0.7);  
+    z-index: 10;
+    width: 100%;
+    min-height: 1000px;
 }
 
 
@@ -101,11 +76,20 @@ html, body {
 	/*display: flex;
 	flex-direction: column;*/
 }
-
-.main button {
+ 
+.ask-btn {
 	float: right;
-
+	margin-right: 3rem;
+	background-color: chocolate;
+	color: white;
 }
+
+.ask-btn:hover {
+	background-color:rgb(218, 74, 22);
+	color:white;
+	border: 2px solid brown;
+}
+
 
 
 label, input {
@@ -130,9 +114,10 @@ input {
 }
 
 h1, h2 {
-	color: lightgrey;
+	color: chocolate;
 	padding-top: 30px;
 	text-align: center;
+
 }
 
 
@@ -188,12 +173,11 @@ form {
 }
 
 .questionsDiv {	
-	border: 1px solid black;
-	width: 95%;
+	border: none;
+	width: 100%;
 	margin: 0 auto;
-	margin-bottom: 20px;
 	min-height: 100vh;
-	background-color: whitesmoke;
+	background-color: lightblue;
 }
 
 /* Navigation bar */

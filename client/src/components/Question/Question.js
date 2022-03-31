@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Question.css";
 
+const api = process.env.API_URL || "/api";
 function Question({ data, onPressQuestion }) {
 	console.log(data.id);
 
 	const [answers, setAnswers] = useState({});
 	useEffect(() => {
-		fetch(`http://localhost:3100/api/answers/${data.id}`)
+	fetch(`${api}/answers/${data.id}`)
 			.then((res) => res.json())
 			.then((data) => setAnswers(data))
 			.catch((err) => console.error(err));
@@ -25,11 +26,11 @@ function Question({ data, onPressQuestion }) {
 					<h4 className="card-title">{data.title}</h4>
 					{/* <div className="arrow.right"></div> */}
 					<div className="subQtnStyle card-text">
-						<h4>
+						<h6>
 							{answers.length === 0 || answers.length === 1
-								? `${answers.length} Answer`
-								: `${answers.length} Answers`}
-						</h4>
+								? `${"0" + answers.length} Answer`
+								: `${answers.length < 10? "0" + answers.length + " " +"Answers" : answers.length + " " + "Answers"}`}
+						</h6>
 						{/* <span>{data.created_at}</span> */}
 						{/* <button
 					className="btn btn-danger"

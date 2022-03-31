@@ -36,6 +36,7 @@ const Main = () => {
 
   return (
 
+
     <div className="containermain" >
       <Navigation />
 		<main className="main" role="main">
@@ -48,16 +49,16 @@ const Main = () => {
 			</div>
 			<div className="questionsDiv">
 				{/* ADD question module in this div */}
+
 					{typeof id === "number" && <SelectedQtnThread id={id} />}
 					<ListedQtnThread
 						onPressQuestion={(questionId) => setId(questionId)}
 					/>
-					<Pagination />
-			</div>
-		</main>
-    <Footer />
-    </div>
-
+					{/* <Pagination /> */}
+				</div>
+			</main>
+			<Footer />
+		</div>
 	);
 };
 
