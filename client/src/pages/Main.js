@@ -35,28 +35,27 @@ const Main = () => {
 
 
   return (
-
-    <div className="containermain" >
-      <Navigation />
-		<main className="main" role="main">
-    {show === true && <AskQuestionForm show={show} />}
-				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
-			<div className="top">
-				<h1>TheNerds APP</h1>
-				<h1>Main</h1>
-			</div>
-			<div className="questionsDiv">
-				{/* ADD question module in this div */}
+		<div className={show ? "show containermain" : "containermain"}>
+			<Navigation />
+			{show === true && <AskQuestionForm show={show} />}
+			<main className="main" role="main">
+				<button className="ask-btn btn" onClick={handleShow}>
+					Ask Question
+				</button>
+				<div className="top">
+					<h1>Welcome to TheNerds Q&A APP</h1>
+				</div>
+				<div className="questionsDiv">
+					{/* ADD question module in this div */}
 					{typeof id === "number" && <SelectedQtnThread id={id} />}
 					<ListedQtnThread
 						onPressQuestion={(questionId) => setId(questionId)}
 					/>
-					<Pagination />
-			</div>
-		</main>
-    <Footer />
-    </div>
-
+					{/* <Pagination /> */}
+				</div>
+			</main>
+			<Footer />
+		</div>
 	);
 };
 

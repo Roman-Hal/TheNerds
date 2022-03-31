@@ -8,25 +8,6 @@ const api = process.env.API_URL || "/api";
 const AnswersByIdThreads = ({ questionId }) => {
 	const [answers, setAnswers] = useState([]);
 
-	// console.log(questionId);
-	// fetch(questionId);
-	// function fetchingAnswers() {
-	// 	fetch(questionId)
-	// 		.then((res) => res.json())
-	// 		.then((data) => setAnswers(data));
-	// }
-
-	// const handleSendReply = (answer) => {
-	// 	fetch
-	// 		.post(answer)
-	// 		.then()
-	// 		.then(() => fetchingAnswers())
-	// 		.catch();
-	// };
-
-	// useEffect(() => {
-	// 	fetchingAnswers();
-	// }, []);
 
 	useEffect(() => {
 		fetch(`${api}/answers/${questionId}`)

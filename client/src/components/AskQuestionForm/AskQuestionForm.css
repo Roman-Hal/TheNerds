@@ -15,9 +15,9 @@
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   box-shadow: 0 4px 8px 0 rgb(210, 105, 30, 0.5), 0 6px 20px 0 rgb(210, 105, 30, 0.5);
    text-align: center;
-   background-color: whitesmoke;
+   background-color: lightblue;
    position: absolute;
    width: 40%;
 }
@@ -32,11 +32,11 @@
 .AskQtnCloseBtn span{	
 	font-weight: bolder;
 	font-size: x-large;
-	color: brown;
+	color: rgb(218, 74, 22);;
 }
 
 .AskQtnCloseBtn:hover {
-	border: 1px solid brown;
+	border: 1px solid rgb(218, 74, 22);;
 	padding: 0;
 	background-color: hsl(0, 59%, 41%, 0.3);
 }
@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    background-color: hsl(0, 0%, 0%, 0.9);  
+    background-color: rgb(139, 69, 19, 0.7);  
     z-index: 10;
     width: 100%;
     min-height: 1000px;

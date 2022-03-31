@@ -26,11 +26,11 @@ function Question({ data, onPressQuestion }) {
 					<h4 className="card-title">{data.title}</h4>
 					{/* <div className="arrow.right"></div> */}
 					<div className="subQtnStyle card-text">
-						<h4>
+						<h6>
 							{answers.length === 0 || answers.length === 1
-								? `${answers.length} Answer`
-								: `${answers.length} Answers`}
-						</h4>
+								? `${"0" + answers.length} Answer`
+								: `${answers.length < 10? "0" + answers.length + " " +"Answers" : answers.length + " " + "Answers"}`}
+						</h6>
 						{/* <span>{data.created_at}</span> */}
 						{/* <button
 					className="btn btn-danger"
