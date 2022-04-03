@@ -6,10 +6,6 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-html, body {
-	background-color: lightblue;
-}
-
 html::-webkit-scrollbar {
  background-color: AliceBlue;;
 

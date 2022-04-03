@@ -4,7 +4,7 @@ import Question from "../Question/Question.js";
 import "./ListedQtnThread.css";
 
 const api = process.env.API_URL || "/api";
-const ListedQtnThread = ({ onPressQuestion }) => {
+const ListedQtnThread = ({ onPressQuestion, questionId }) => {
 	const[questionsData, setQuestionData] = useState(null);
 
 	useEffect(() => {
@@ -17,19 +17,37 @@ const ListedQtnThread = ({ onPressQuestion }) => {
 			.then((data) => setQuestionData(data));
 	}, []);
 
+	const handleDelete = (e) => {
+		e.preventDefault;
+		fetch(`${api}/questions/${questionId}`, { method: "DELETE" })
+			.then((res) => res.json())
+			.catch((err) => console.error(err));
+	};
+
     return questionsData?(
 			<div className="listedQtnThreadFormat">
 				{questionsData.map((question) => {
 					return (
-						<>
-							<button className="tentative"
+						<div key={question.Id} className="tent">
+							<button
+								className="tentative"
 								onClick={() => onPressQuestion(question.id)}
 							>
 								<span>
 									<Question data={question} />
 								</span>
 							</button>
-						</>
+							<div className="btn-wrapper">
+								<button className="edit-btn btn btn-outline-dark">Edit</button>
+								<button
+									id={question.id}
+									onClick={handleDelete}
+									className="delete-btn btn btn-outline-danger"
+								>
+									Delete
+								</button>
+							</div>
+						</div>
 					);
 				})}
 			</div>

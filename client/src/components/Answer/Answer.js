@@ -5,7 +5,9 @@ function Answer({ data, key }) {
 	console.log(data);
 	// const [answersData, setAnswersData] = useState([data]);
   return (
-		<div className="subAnswersFormat overflow-auto">
+		<div
+			className="subAnswersFormat overflow-auto"
+		>
 			{/* <p className="p1">
 				<strong>{data.owner}</strong>
 			</p> */}

@@ -1,10 +1,8 @@
 .answersFormat {
 	border-left: 3px solid chocolate;
-	overflow-y: auto;
-	scrollbar-color: lightblue;/*rebeccapurple green;*/
+	scrollbar-color: lightblue;
     scrollbar-width: thin;
-	scrollbar-color: lightblue;/*rebeccapurple green;*/
-	height: 40vh;
+	scrollbar-color: lightblue;
 }
 
 .answersFormat::-webkit-scrollbar {
@@ -18,9 +16,21 @@
 	background-color:rgb(101, 197, 230);
 }
 
-h4 {
+.answer-link {
 	text-align: left;
-	font-size: large;
+	font-size: 1.3rem;
 	font-weight: bold;
 	color: rgb(218, 74, 22);
 }
+
+.answer-link:hover {
+	text-align: left;
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: rgb(233, 177, 73);
+}
+
+.display {
+	display: none;
+}
+

@@ -7,6 +7,7 @@ import "./AnswersByIdThread.css";
 const api = process.env.API_URL || "/api";
 const AnswersByIdThreads = ({ questionId }) => {
 	const [answers, setAnswers] = useState([]);
+	const [display, setDisplay] = useState(true);
 
 
 	useEffect(() => {
@@ -16,15 +17,17 @@ const AnswersByIdThreads = ({ questionId }) => {
 			.catch((err) => console.error(err));
 	}, [questionId]);
 
-	console.log(answers);
+	const handleDisplay = () => {
+		setDisplay(!display);
+	};
 	return (
 		<div>
-			<h4>Answer(s)</h4>
-			<div className="answersFormat">
-				{/* {answers.map((answer) => { */}
-					<Answer key={questionId} data={answers} />
-				{/* })} */}
-				{/* <Reply onPress={handleSendReply} /> */}
+			<button type="button" className="answer-link btn btn-link" onClick={handleDisplay}>
+				Answer(s)
+			</button>
+			{/* <h4>Answer(s)</h4> */}
+			<div className={display? "display": "answersFormat"}>
+				<Answer key={questionId} data={answers} display={display} />
 			</div>
 		</div>
 	);

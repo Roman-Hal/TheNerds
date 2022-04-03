@@ -1,34 +1,53 @@
 import React, { useState } from "react";
 import AnswersByIdThreads from "../AnswersById/AnswersByIdThread";
 import "./ReplyForm.css";
+//import RichText from "../TextEditor/RichText";
+// import { EditorState } from "draft-js";
+// import { convertToHTML } from "draft-convert";
+// import { Editor } from "react-draft-wysiwyg";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import DOMPurify from "dompurify";
 import { EditorState } from "draft-js";
-//import { convertToHTML } from "draft-convert";
 import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { convertToHTML } from "draft-convert";
 import DOMPurify from "dompurify";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "./RichText.css";
 
 const api = process.env.API_URL || "/api";
 const ReplyForm = ({ questionId }) => {
-	//const [name, setName] = useState("");
-	// const [description, setDescription] = useState("");
-	// const [updatedAnswersData, setUpdatedAnswersData] = useState(
-	// 	replyData.flat()
+
+	// const [editorState, setEditorState] = useState(() =>
+	// 	EditorState.createEmpty()
 	// );
-	const [editorState, setEditorState] = useState(() =>
-		EditorState.createEmpty()
-	);
 	// const [convertedContent, setConvertedContent] = useState(null);
 	// const handleEditorChange = (state) => {
 	// 	setEditorState(state);
 	// 	convertContentToHTML();
 	// };
 	// const convertContentToHTML = () => {
-	// 	let currentContentAsHTML = convertToHTML();
+	// 	let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
 	// 	setConvertedContent(currentContentAsHTML);
 	// };
+	const [editorState, setEditorState] = useState(() =>
+		EditorState.createEmpty()
+	);
+	const [convertedContent, setConvertedContent] = useState(null);
+	const handleEditorChange = (state) => {
+		setEditorState(state);
+		convertContentToHTML();
+	};
+	const convertContentToHTML = () => {
+		let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+		setConvertedContent(currentContentAsHTML);
+	};
+	const createMarkup = (html) => {
+		return {
+			__html: DOMPurify.sanitize(html),
+		};
+	};
 
 
-	// body:{question_id:1, answer_content:'asdadsadas'}
 	const onSubmitReply = async (e) => {
 		e.preventDefault();
 		try {
@@ -64,11 +83,11 @@ const ReplyForm = ({ questionId }) => {
 	// 	e.target.children[0].value = "";
 	// 	setEditorState("");
 	// };
-	const createMarkup = (html) => {
-		return {
-			__html: DOMPurify.sanitize(html),
-		};
-	};
+	// const createMarkup = (html) => {
+	// 	return {
+	// 		__html: DOMPurify.sanitize(html),
+	// 	};
+	// };
 
 	return (
 		<div>
@@ -80,28 +99,18 @@ const ReplyForm = ({ questionId }) => {
 				className="replyFormStyle form-group"
 				onSubmit={onSubmitReply}
 			>
-				<input
-					id="name"
-					className="form-control input1"
-					type="text"
-					name="name"
-					placeholder="Write your name here..."
-					autoComplete="off"
-					//onChange={(e) => setName(e.target.value)}
-					required
-				/>
-				<Editor
+				{/* <Editor
 					wrapperClassName="wrapper"
 					editorClassName="editor"
 					toolbarClassName="toolbar"
 					editorState={editorState}
-					onEditorStateChange={setEditorState}
-					/* handleEditorChange*/
+					onEditorStateChange={handleEditorChange}
+					EditorState
 					toolbar={{
 						inline: { inDropdown: true },
 						list: { inDropdown: true },
 						textAlign: { inDropdown: true },
-						//link: { inDropdown: true },
+						link: { inDropdown: true },
 						history: { inDropdown: true },
 						link: {
 							visible: true,
@@ -115,7 +124,21 @@ const ReplyForm = ({ questionId }) => {
 							url: true,
 						},
 					}}
-				/>
+				/> */}
+				<div className="App">
+					<header className="App-header">Your answer</header>
+					<Editor
+						editorState={editorState}
+						onEditorStateChange={handleEditorChange}
+						wrapperClassName="wrapper-class"
+						editorClassName="editor-class"
+						toolbarClassName="toolbar-class"
+					/>
+					<div
+						className="preview"
+						dangerouslySetInnerHTML={createMarkup(convertedContent)}
+					></div>
+				</div>
 				<button className="btn reply-btn">Reply</button>
 			</form>
 		</div>

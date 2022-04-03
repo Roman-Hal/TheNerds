@@ -4,9 +4,9 @@ export const endpoints = {
     GET_ANSWERS: (questionId)=>`/api/answers/${questionId}`,
     POST_ANSWER: ()=>"/api/answer", // body:{question_id:1, answer_content:'asdadsadas'}
     POST_QUESTION: ()=>"/api/question", // body:{title:'dad', content:'adsda', category:['sad','sad']},
-    PATCH_QUESTION: () => "/questions", // body:{id:"5", title:"title", content:"ahshjsj"}}
-    PATCH_ANSWER: () => "/answers", // body:{id:"5", title:"title", content:"ahshjsj"}}
-    DELETE_QUESTION: () => "/questions/:id", 
-    DELETE_ANSWER: () => "/answers/:id"
+    PATCH_QUESTION: () => "/questions", // body:{id:"5", title:"title", content:"ahshjsj"}
+    PATCH_ANSWER: () => "/answers", // body:{id:"5", title:"title", content:"ahshjsj"}
+    DELETE_QUESTION: () => "/questions/:id",
+    DELETE_ANSWER: () => "/answers/:id",
 };
 

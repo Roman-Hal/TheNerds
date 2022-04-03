@@ -12,12 +12,13 @@ function Question({ data, onPressQuestion }) {
 			.then((data) => setAnswers(data))
 			.catch((err) => console.error(err));
 	}, [data.id]);
-	// const handleDelete = (e) => {
-	// 	console.log(e.target.value);
-	// 	fetch(`http://localhost:3100/api/questions/${data.id}`)
-	// 	.then((res) => res.json())
-	// 	.catch((err) => console.error(err));
-	// };
+	console.log(answers);
+
+	const handleDelete = (e) => {
+		fetch(`http://localhost:3100/api/questions/${data.id}`)
+		.then((res) => res.json())
+		.catch((err) => console.error(err));
+	};
 
   return (
 		<>

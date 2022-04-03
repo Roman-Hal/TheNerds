@@ -18,8 +18,13 @@ const SelectedQtnThread = ({ id }) => {
 	return (
 		<ul className={hide ? "hide" : "selectedQtnContain"}>
 			<li>
-				<button type="button" className="close" onClick={handleHide}>
-					<span aria-hidden="true">×</span>
+				<button
+					type="button"
+					className="close"
+					aria-label="Close"
+					onClick={handleHide}
+				>
+					<span aria-hidden="true">&times;</span>
 				</button>
 				<QuestionById questionId={id} />
 			</li>

@@ -7,6 +7,7 @@
 .listedQtnThreadFormat button {
   border: none; 
   padding: 0;
+
 }
 
 
@@ -37,15 +38,33 @@
  background-color: rgb(101, 197, 230);
 
 }
-/*
-overflow-y: scroll;
-	scrollbar-color: lightblue;/*rebeccapurple green;
-  scrollbar-width: thin;
-	scrollbar-color: lightblue;/*rebeccapurple green;
-  */
 
 .tentative {
   background-color: lightblue;
+}
+
+
+.tent {
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  min-height: auto;
+}
+.edit-btn {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 8rem;
+}
+
+.delete-btn {
+  padding: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 
 

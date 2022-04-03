@@ -2,25 +2,61 @@
     display: block;
     color: black;
 	max-width: 100%;
-    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-top: 3rem;
 }
 
 .askQuestionStyle input,
 .askQuestionStyle textarea{
 	max-width: 90%;
 }
+.askQtn-btn {
+    background-color: rgb(218, 74, 22);
+    color: white;
+    margin-top: 1rem;
+}
 
 .askQuestionStyle {
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
    box-shadow: 0 4px 8px 0 rgb(210, 105, 30, 0.5), 0 6px 20px 0 rgb(210, 105, 30, 0.5);
    text-align: center;
-   background-color: lightblue;
+   background-color: #F5DEB3;
    position: absolute;
-   width: 40%;
+   max-width: 100%;
 }
+
+.askQtn-banner h1{
+    font-size: 1.2rem;
+    color: black;
+}
+
+.askQtn-banner li{
+    list-style: disc;
+    text-align: center;
+    
+}
+
+.askQtn-banner {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid red;
+    margin: auto;
+    width: 80%;
+}
+
+.askQtn-banner ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+
 
 .AskQtnCloseBtn {
     position: absolute;

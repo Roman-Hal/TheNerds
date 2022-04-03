@@ -41,7 +41,7 @@ const Main = () => {
       <Navigation />
 		<main className="main" role="main">
     {show === true && <AskQuestionForm show={show} />}
-				<button className="btn btn-danger" onClick={handleShow}>Ask Question</button>
+				<button className="ask-btn btn" onClick={handleShow}>Ask Question</button>
 			<div className="top">
 				<h1>TheNerds Q & A APP</h1>
         <p className="main-p">ask technical related question about JS, HTML, CSS</p>
@@ -52,7 +52,7 @@ const Main = () => {
 
 					{typeof id === "number" && <SelectedQtnThread id={id} />}
 					<ListedQtnThread
-						onPressQuestion={(questionId) => setId(questionId)}
+						onPressQuestion={(questionId) => setId(questionId)} questionId={id}
 					/>
 					{/* <Pagination /> */}
 				</div>

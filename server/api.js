@@ -327,7 +327,7 @@ router.get("/questions/:id", async (req, res) => {
 router.get("/answers/:id", async (req, res) => {
 	const questionId = req.params.id;
 	const answersByQId = `SELECT * FROM answers WHERE question_id=${questionId}`;
-	const checkIfExists = `select exists(select 1 from answers where id=${questionId})`;
+	const checkIfExists = `select exists(select 1 from questions where id=${questionId})`;
 	if (!isValid(questionId)) {
 		res.status(400).json({ "Server message": "Invalid id!" });
 	} else {
@@ -414,13 +414,13 @@ router.patch("/answers", async (req, res) => {
 // endpoint for post questions
 
 router.post("/question", async (req, res) => {
-	const category = req.body.category;
+	// const category = req.body.category;
 	const title = req.body.title;
 	const content = req.body.content;
 	const query =
-		"INSERT INTO questions (category, title, content) VALUES ($1,$2,$3)";
+		"INSERT INTO questions (title, content) VALUES ($1,$2)";
 	try {
-		await db.query(query, [category, title, content]);
+		await db.query(query, [title, content]);
 		res.status(201).send({ Success: "Your Question is Successfully Posted!" });
 	} catch (error) {
 		res.status(500).send(error);
