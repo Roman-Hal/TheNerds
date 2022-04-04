@@ -3,7 +3,7 @@
 import Navigation from "./Navigation";
 import SelectedQtnThread from "../components/SelectedQtnThread/SelectedQtnThread";
 import ListedQtnThread from "../components/ListedQtnThread/ListedQtnThread";
-import Pagination from "../components/Pagination/Pagination";
+//import Pagination from "../components/Pagination/Pagination";
 import "./Home.css";
 
 //import { questionsData } from "../mock/data";
@@ -34,25 +34,31 @@ const Main = () => {
 
 
 
-  return (
-
-
-    <div className="containermain" >
-      <Navigation />
-		<main className="main" role="main">
-    {show === true && <AskQuestionForm show={show} />}
-				<button className="ask-btn btn" onClick={handleShow}>Ask Question</button>
-			<div className="top">
-				<h1>TheNerds Q & A APP</h1>
-        <p className="main-p">ask technical related question about JS, HTML, CSS</p>
-				<h1>Main</h1>
-			</div>
-			<div className="questionsDiv">
-				{/* ADD question module in this div */}
+  return show === true ? (
+		<>
+			<AskQuestionForm show={show} />
+		</>
+	) : (
+		<div className="containermain">
+			<Navigation />
+			<main className="main" role="main">
+				<button className="ask-btn btn" onClick={handleShow}>
+					Ask Question
+				</button>
+				<div className="top">
+					<h1>TheNerds Q & A APP</h1>
+					<p className="main-p">
+						ask technical related question about JS, HTML, CSS
+					</p>
+					<h1>Main</h1>
+				</div>
+				<div className="questionsDiv">
+					{/* ADD question module in this div */}
 
 					{typeof id === "number" && <SelectedQtnThread id={id} />}
 					<ListedQtnThread
-						onPressQuestion={(questionId) => setId(questionId)} questionId={id}
+						onPressQuestion={(questionId) => setId(questionId)}
+						questionId={id}
 					/>
 					{/* <Pagination /> */}
 				</div>
