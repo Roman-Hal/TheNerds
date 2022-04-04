@@ -15,11 +15,32 @@
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
-   box-shadow: 0 4px 8px 0 rgb(210, 105, 30, 0.5), 0 6px 20px 0 rgb(210, 105, 30, 0.5);
+   box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.1), 0 6px 20px 0 rgb(0, 0, 0, 0.1);
    text-align: center;
-   background-color: lightblue;
+   background-color: LightYellow;
    position: absolute;
-   width: 40%;
+   min-width: 60%;
+   min-height: 100vh;
+   
+}
+
+.askQtn-banner h1{
+    font-size: 1.2rem;
+    color: black;
+}
+
+.askQtn-banner li{
+    list-style: disc;
+    text-align: center;
+    
+}
+
+.askQtn-banner {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid red;
+    margin: auto;
+    width: 80%;
 }
 
 .AskQtnCloseBtn {
@@ -40,17 +61,17 @@
 	padding: 0;
 	background-color: hsl(0, 59%, 41%, 0.3);
 }
-
+/* 
 .show {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    background-color: rgb(139, 69, 19, 0.7);  
+    background-color: rgb(0, 0, 0, 0.6);  
     z-index: 10;
     width: 100%;
-    min-height: 1000px;
-}
+    min-height: 1200px;
+} */
 
 .hide {
     display: none;

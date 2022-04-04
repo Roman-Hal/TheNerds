@@ -17,7 +17,7 @@ const AskQuestionForm = ({ show }) => {
 				method: "post",
 				headers: {
 					"Content-Type": "application/json",
-					"Content-Type": "application/x-www-form-urlencoded",
+					// "Content-Type": "application/x-www-form-urlencoded",
 				},
 				body: JSON.stringify(body),
 			});
@@ -27,17 +27,6 @@ const AskQuestionForm = ({ show }) => {
 		}
 	};
 
-	const populateHtml = (e) => {
-		e.preventDefault();
-		setHtml("html");
-		setTags(tags.push(html));
-	};
-
-	const populateCss = (e) => {
-		e.preventDefault();
-		setHtml("css");
-		setTags(tags.push(css));
-	};
 
 	// async function onSubmitForm(
 	// 	url = "http://localhost:3100/api/askQuestion",
@@ -68,6 +57,28 @@ const AskQuestionForm = ({ show }) => {
 				<button type="button" className="AskQtnCloseBtn" onClick={handleHide}>
 					<span aria-hidden="true">×</span>
 				</button>
+				{/* <div className="askQtn-banner">
+					<h1>Writing a good question</h1>
+					<p>
+						You’re ready to ask a programming-related question and this form
+						will help guide you through the process.
+					</p>
+					<p>
+						Looking to ask a non-programming question? See the topics here to
+						find a relevant site.
+					</p>
+					<ul>
+						<span>Steps</span>
+						<li>Summarize your problem in a one-line title.</li>
+						<li>Describe your problem in more detail.</li>
+						<li>Describe what you tried and what you expected to happen.</li>
+						<li>
+							Add “tags” which help surface your question to members of the
+							community.
+						</li>
+						<li>Review your question and post it to the site.</li>
+					</ul>
+				</div> */}
 				<label htmlFor="title">Title</label>
 				<input
 					className="form-control"

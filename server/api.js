@@ -20,6 +20,23 @@ const users = [
 	},
 ];
 
+router.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader(
+		"Access-Control-Allow-Methods",
+		"GET, POST, DELETE, PUT, PATCH"
+	);
+	res.setHeader("Access-Control-Allow-Headers", "application/json");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Access-Control-Allow-Methods",
+		"Access-Control-Allow-Origin",
+		"Origin, X-Requested-With, Content-Type, Accept"
+	);
+	next();
+});
+
 /*router.get("/", verifyToken, (_, res) => {
 	res.json({ message: "Hello, world!" });
 });*/
@@ -320,7 +337,7 @@ router.get("/questions/:id", async (req, res) => {
 router.get("/answers/:id", async (req, res) => {
 	const questionId = req.params.id;
 	const answersByQId = `SELECT * FROM answers WHERE question_id=${questionId}`;
-	const checkIfExists = `select exists(select 1 from answers where id=${questionId})`;
+	const checkIfExists = `select exists(select 1 from questions where id=${questionId})`;
 	if (!isValid(questionId)) {
 		res.status(400).json({ "Server message": "Invalid id!" });
 	} else {
